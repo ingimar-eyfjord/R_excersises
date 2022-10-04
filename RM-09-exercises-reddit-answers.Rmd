@@ -1,0 +1,231 @@
+---
+title: "Reddit exercises ('Collection, cleaning & transformation w/ R, part 1')"
+author: "Toine Bogers"
+date: "September 7, 2022"
+output: rmdformats::readthedown
+#output: rmdformats::downcute
+#output: rmdformats::material
+#output: rmdformats::html_clean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+For this set of exercises we will be using the results of a survey on travel behavior posted to the Reddit [**/r/travel/** subreddit](https://www.reddit.com/r/travel/). This subreddit (obviously) focuses on travel and the goal of the survey was to collect and analyze information about the travel behavior of its members.
+
+The original questionnaire consisted of two parts, of which part 2 was optional to complete. Part one contained approx. 38 questions (depending on how you count) and was completed by all 800+ participants. Part two contained an additional 56 questions and was completed by 646 participants. You can find the original survey questions [here](https://docs.google.com/forms/d/e/1FAIpQLSfy0jyTicyMYk2xAzzR1OH264EsQRnZ6LcF_A5S_aEHdRESGQ/viewform) and the original data [here](https://goo.gl/Dev1pk). I have filtered out the least interesting questions, so we are left with a smaller survey data set. You can find this filtered data set on Moodle or download it [here](http://toinebogers.com/content/teaching/dvir2020/reddit-travel-survey.csv).
+    
+There are seven exercises belonging to this data set. Good luck! :)
+
+
+### About this document
+
+This is an **R Markdown** version of the `RM-09-exercises-reddit-answers` file. The code used to answer the questions is identical to that file, but I've formatted this version a bit more nicely to show off what R Markdown can be used for. However, since these exercises come after the Titanic dataset, I will more often simply show the answer instead of breaking it down step by step.
+
+As you may have noticed, this R Markdown document looks different from the Titanic one. There are many different free R Markdown templates available. This one comes from the `rmdformats` package, which you can install by running the command `install.packages("rmdformats")`. I've included a few different examples in the metadata section at the top of this document for how to activate them. You can find more information and more examples [here](https://github.com/juba/rmdformats).
+
+
+
+
+
+# Answers
+
+### 1. How many participants and how many variables does it contain?
+
+```{r, message = FALSE}
+
+library(tidyverse)
+travel <- read_csv("reddit-travel-survey.csv")
+
+```
+
+```{r}
+
+participant_count <- nrow(travel)
+column_count <- ncol(travel)
+
+```
+
+The dataset contains `r participant_count` participants with `r column_count` columns of data. 
+
+
+
+
+
+### 2. How many participants live in a country different than their nationality?
+
+The current country of residence can be found in **country_of_residence** and their nationality in **country_of_nationality**. We need to filter out all participants where these two are the same to find all expats:
+
+```{r}
+
+expat_count <- filter(travel, country_of_nationality != country_of_residence) %>% nrow()
+
+```
+
+The dataset contains `r expat_count` expat participants.
+
+
+
+
+
+### 3. Which nationality most frequently lives abroad?
+
+While we haven't learned to group rows together yet by country of nationality, you can inspect the results to visually identify the most frequent countries (using the `View()` function). However, we cannot use this function when we are using R Markdown to generate HTML, so alternatively, we can use the `count()` function to figure out how often the different countries occur. First, we filter like we did in question 2 and then we count by **country_of_nationality**:
+
+```{r}
+
+filter(travel, country_of_nationality != country_of_residence) %>% 
+  count(country_of_nationality)
+
+```
+
+However, we do need to sort this output to find the nationality that most commonly lives abroad:
+
+```{r}
+
+filter(travel, country_of_nationality != country_of_residence) %>% 
+  count(country_of_nationality) %>% 
+  arrange(desc(n)) 
+
+```
+
+Answer: United States at 43 participants
+
+
+
+
+
+### 4.What is the most common relationship status among the Scandinavian countries? 
+
+Let's define Scandinavia as containing Denmark, Sweden, Norway, Iceland, and Finland. Let's define this as a vector of allowed countries:
+
+```{r}
+
+scandinavian_countries <- c("Denmark", "Sweden", "Norway", "Iceland", "Finland")
+
+```
+
+Now let's use this to filter and count the **relationship_status** among those countries' participants:
+
+```{r}
+
+filter(travel, country_of_nationality %in% scandinavian_countries) %>% 
+  select(country_of_nationality, relationship_status) %>% 
+  count(relationship_status) %>% 
+  arrange(desc(n))
+
+```
+
+Answer: Most people are single (*n* = 17)
+
+
+
+
+### 5. Which participant group has the highest percentage of valid passports: the US or the Scandinavian countries?
+
+A common stereotype is that many Americans do not own a valid passport (or any at all), whereas, for instance, most Scandinavians do. Which participant group has the highest percentage of valid passports: the US or the Scandinavian countries? Let's first calculate this for the Scandinavian countries. We can re-use the `scandinavian_countries` list from the previous question for this purpose:
+
+```{r}
+
+# No. of Scandinavians with a passport
+scandi_passport_count <- travel %>% 
+  filter(country_of_nationality %in% scandinavian_countries) %>% 
+  filter(passport == "Yes - valid") %>% 
+  nrow()
+
+# No. of Scandinavians in total
+scandi_total_count <- travel %>% 
+  filter(country_of_nationality %in% scandinavian_countries) %>% 
+  nrow()
+
+# Percentage with a passport.
+scandi_percentage <- scandi_passport_count / scandi_total_count * 100
+
+```
+
+Now let's do the same thing for the US participants:
+
+```{r}
+
+# No. of US citizens with a passport
+us_passport_count <- travel %>% 
+  filter(country_of_nationality == "United States") %>% 
+  filter(passport == "Yes - valid") %>% 
+  nrow()
+
+# No. of US citizens in total
+us_total_count <- travel %>% 
+  filter(country_of_nationality == "United States") %>% 
+  nrow()
+
+# Percentage with a passport.
+us_percentage <- us_passport_count / us_total_count * 100
+
+```
+
+Answer: `r round(scandi_percentage, digits = 1)`% of Scandinavians had a valid passport and `r round(us_percentage, digits = 1)`% of Americans. Of course, US participants of a travel-focused subreddit are not likely to be representative for the US population :)
+
+
+
+
+
+### 6. Which participant from the Benelux travels most often per year? 
+
+The Benelux countries consist of Belgium, Luxembourg and the Netherlands. Find out which participant from these three countries has the highest number of travel days per year. How many days do they travel per year and what country are they from?
+
+
+```{r}
+
+# Let's define a list of Benelux countries first.
+benelux_countries <- c("Belgium", "Luxembourg", "Netherlands")
+
+# Now filter by Benelux countries, extract the nationalities and travel days
+# and find the top one.
+travel %>% 
+  filter(country_of_nationality %in% benelux_countries) %>% 
+  select(country_of_nationality, travel_days_per_year) %>% 
+  arrange(desc(travel_days_per_year)) %>%
+  head(1)
+
+```
+
+Answer: A participant from the Netherlands travels 90 days per year.
+
+
+
+
+
+### 7. Which participant has the highest percentage of business days traveled?
+
+Find out which participant has the highest percentage of business days traveled. In case of ties, find the participant with the highest number of business days traveled in total. Also include their age, gender and nationality.
+
+We need to be careful here, because some people have filled out the survey incorrectly and have listed more business travel days than total travel days, so we need to filter these out.
+
+...
+
+```{r}
+
+travel %>% 
+
+  # Select the columns of interest for us.
+  select(age, gender, country_of_nationality, travel_days_business, travel_days_per_year) %>%  
+  
+  # Create a new variable that contains the share of business days on the total 
+  # number of travel days.
+  mutate(business_share = travel_days_business / travel_days_per_year) %>% 
+  
+  # Make sure we don't include invalid answers.
+  filter(travel_days_per_year >= travel_days_business) %>% 
+  
+  # We want the participant with the highest share of business days, so sort by 
+  # that. In case of ties, let's sort by actual number of business travel days
+  # so we identify get the most active business traveller.
+  arrange(desc(business_share), desc(travel_days_business)) %>%
+  head(1)
+
+```
+
+Answer: A 22-29-year-old male participant from India traveled 100% for business, 75 days in total.

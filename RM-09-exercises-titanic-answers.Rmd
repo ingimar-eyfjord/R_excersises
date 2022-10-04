@@ -1,0 +1,329 @@
+---
+title: "Exercises ('Collection, cleaning & transformation w/ R, part 1')"
+author: "Toine Bogers"
+date: "September 7, 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+For this set of exercises we will be using the well-known Titanic data set This data set contains information the Titanic's passenger manifest as well as whether each passenger survived the disaster or not. This data set was original part of a Kaggle data science competition on learning to predict someone's chances of surviving the Titanic's maiden voyage based on their characteristics.
+
+The original questionnaire consisted of two parts, of which part 2 was optional to complete. Part one contained approx. 38 questions (depending on how you count) and was completed by all 800+ participants. Part two contained an additional 56 questions and was completed by 646 participants. 
+
+You can find the original data set [here](https://www.kaggle.com/c/titanic/overview). I have uploaded the data set to Moodle, so you can download it there.
+
+There are seven exercises belonging to this data set. Good luck! :)
+
+
+### About this document
+
+This is an **R Markdown** version of the `RM-09-exercises-titanic-answers` file. The code used to answer the questions is identical to that file, but I've formatted this version a bit more nicely to show off what R Markdown can be used for.
+
+
+
+
+
+# Answers
+
+### 1. How many passengers and how many variables does it contain?
+
+First, we need to read in the Titanic data from file (`titanic.csv`) using the `read_csv` method from the `tidyverse` package
+
+```{r, message=FALSE}
+
+library(tidyverse)
+
+titanic <- read_csv("titanic.csv")
+
+```
+
+The number of passengers is equal to the number of rows, for which we can use the `nrow()` function. The number of variables is the same as the number of columns, which we can find using the `ncol()` function.
+
+```{r}
+
+no_of_rows <- nrow(titanic)
+no_of_columns <- ncol(titanic)
+
+```
+
+We can also include the values of these variables directly in the text like this: the `titanic.csv` dataset contains data about `r no_of_rows` passengers, spread out over `r no_of_columns` different columns.
+
+
+
+
+
+### 2. What is the highest ticket fare any passenger paid to sail aboard the Titanic?
+
+The ticket fare data is contained in the **Fare** column, so we should select that and sort in descending order (so from high to low). The highest paid fare will then be at the top of the list. We can use the `head()` function to take that top 1 row.
+
+```{r}
+
+titanic %>% 
+  # The ticket prices are contained in the Fare column, which is the only one we need to
+  # solve this problem, so let's first select that column.
+  select(Fare) %>% 
+  
+  # To figure out what the highest fare is, we need to sort this column in descending 
+  # order by ticket price.
+  arrange(desc(Fare)) %>% 
+  
+  # We can either simply look up the ticket price from the top of this table or we can 
+  # use the head() function to select the top row for the answer.
+  head(1)
+
+```
+
+If we wanted to store that value in a single variable to work with, we can 'pull' that value out using the `pull()` function:
+
+```{r}
+
+highest_fare <- titanic %>% 
+  select(Fare) %>% 
+  arrange(desc(Fare)) %>% 
+  head(1) %>% 
+  pull()
+
+```
+
+The highest fare was `r highest_fare` GBP (or I assume that's what the currency was).
+
+
+
+
+
+### 3. What percentage of passengers survived the Titanic disaster?
+
+If we want to know what percentage of passengers survived, we need to know two things: how many passengers survived and how many passengers were on board in total. We already answered the latter back when we answered question 1: 
+
+```{r}
+
+total_count <- nrow(titanic)
+print(total_count)
+
+```
+
+This shows there were `r total_count` passengers on board in total. Another way of solving this is using the `count()` function. Beware, however, that the `count()` function does not return a number, but a tibble! You would again need to use the `pull()` function to pull out the number itself, as shown below. For this reason, it's usually easier to use `nrow()`.
+
+```{r}
+
+total_count2 <- count(titanic)
+print(total_count2)
+
+total_count3 <- count(titanic) %>% pull()
+print(total_count3)
+
+```
+
+What about how many passengers survived? Whether someone survived or not, is in the **Survived** column. If there is a '1' in there, then that that passenger survived. If it's a '0', then they perished. We can use the `filter()` function to keep only the passengers who survived. After that, we count how many rows there are in that filtered tibble, and save it to a variable.
+
+```{r}
+
+survived_count <- filter(titanic, Survived == 1) %>% nrow()
+print(survived_count)
+
+```
+
+This tells us that there `r survived_count` passengers survived the Titanic disaster. The last step is to calculate the percentage of survivors:
+
+```{r}
+
+survived_perc <- (survived_count / total_count) * 100
+print(survived_perc)
+
+```
+
+This shows us `r survived_count` passengers survived the Titanic disaster, `r survived_perc`% of the total.
+
+
+
+
+
+### 4. Which gender had the best odds of survival?
+
+A common phrase during evacuations is "Woman and children first!" Was this true on the Titanic? Which gender had the best odds of survival? Let's start with women first: how many were on board and what percentage of them survived?
+
+```{r}
+
+# How many female passengers are there? We can find out by using filter() and only keeping
+# those that have the value 'female' in the 'Sex' column.
+women_total <- filter(titanic, Sex == "female") %>% nrow()
+
+# How many female passengers survived? These are two conditions that both need to be true.
+# We can combine conditions using the AND operator ('&').
+women_survived <- filter(titanic, Sex == "female" & Survived == 1) %>% nrow()
+
+# What is the percentage?
+women_survival_rate <- women_survived / women_total * 100
+
+```
+
+Now let's calculate the same for the men:
+
+```{r}
+
+# For men it's the same, but with a different gender value.
+men_total <- filter(titanic, Sex == "male") %>% nrow()
+men_survived <- filter(titanic, Sex == "male" & Survived == 1) %>% nrow()
+men_survival_rate <- men_survived / men_total * 100
+
+```
+
+It turns out that `r women_survival_rate`% of women survived, but only `r men_survival_rate`% of men, so women had the best survival odds. 
+
+In case you want to control how many decimal places are shown when you print a number, you can use the `round(<NUMBER>, digits = <NUMBER OF DIGITS>)` function:
+
+```{r}
+
+print(round(women_survival_rate, digits = 0))
+
+print(round(women_survival_rate, digits = 1))
+      
+print(round(women_survival_rate, digits = 4))
+
+```
+
+So properly formatted:  `r round(women_survival_rate, digits = 1)`% of women survived, but only `r round(men_survival_rate, digits = 1)`% of men. 
+
+
+
+
+
+### 5. Did richer passengers survive at a higher rate?
+
+Money can buy you everything they say. Is that true for survival odds too? How much money did the surviving passengers pay for their ticket on average, compared to those who did not survive the trip?
+
+We will run into two issues here. First, to calculate the mean of a variable, we need to use a dedicated function for this called `mean()`. Second, we cannot use this to calculate the mean of a tibble, so we need to get out a vector of values instead. We use the `pull()` function for this again.
+
+First, let's calculate the mean fare for survivors:
+
+```{r}
+
+survived_fare <- titanic %>% 
+  # Keep only the survivors.
+  filter(Survived == 1) %>% 
+  
+  # For this subset of the data, we now need only the fare, so select this column.
+  select(Fare) %>% 
+  
+  # Here, we pull the contents of the filtered and selected tibble into a vector. We need 
+  # to do this, because the mean() function only works on vectors, not tibbles.
+  pull() %>%       
+  
+  # Calculate the mean of this vector of fare values.
+  mean()
+
+print(survived_fare)
+
+```
+
+Survivors paid `r round(survived_fare, digits = 2)` GBP on average.
+
+```{r}
+
+# Do the same thing for the passengers who perished.
+perished_fare <- titanic %>% 
+  filter(Survived == 0) %>% 
+  select(Fare) %>% 
+  pull() %>% 
+  mean()
+
+```
+
+The passengers who perished paid `r round(perished_fare, digits = 2)` GBP on average, so money does seem to matter.
+
+
+
+
+
+### 6. Were the people who survived younger on average?
+
+This question is very similar to the previous question, but while we can borrow a lot of that solution's code, we cannot simply repeat our recipe from the previous question here or we will run into a problem. A first attempt to solve this could look like this:
+
+```{r}
+
+# 
+filter(titanic, Survived == 1) %>% 
+  select(Age) %>% 
+  pull() %>% 
+  mean()       
+
+```
+
+This results in a mean of `NA`, because the **Age** column contains `NA` values—we don't have an age for every passenger in our dataset. What we need to do, is tell the `mean()` function to remove all those missing `NA` values using the `na.rm = TRUE` parameter. So the way around the NA issue is like this:
+
+```{r}
+
+survived_age <- filter(titanic, Survived == 1) %>% 
+  select(Age) %>% 
+  pull() %>% 
+  mean(na.rm = TRUE)     # By telling the function to ignore these NA values, we can get the true mean
+
+perished_age <- filter(titanic, Survived == 0) %>% 
+  select(Age) %>% 
+  pull() %>% 
+  mean(na.rm = TRUE)
+
+```
+
+Answer: Surviving passengers were `r round(survived_age, digits = 1)` years old on average, while passengers who died were `r round(perished_age, digits = 1)` on average. The answer is therefore yes.
+
+
+
+
+
+### 7. Did the passengers who boarded in France spend more money on their tickets?
+
+Passengers could embark in one of three different locations: Cherbourg, France (**C**), Queenstown, Ireland (**Q**), or Southampton, UK (**S**). Did the passengers who boarded in France spend more money on their ticket on average than passengers from the other ports of embarkation combined?
+
+Let's calculate the average fare Cherbourg passengers first:
+
+```{r}
+
+# Average fare for Cherbourg passengers
+avg_fare_C <- filter(titanic, PortOfEmbarkation == "C") %>% 
+  select(Fare) %>% 
+  pull() %>%
+  mean()
+
+print(avg_fare_C)
+
+```
+
+Please not that we are comparing Cherbourg (**C**) vs. Queenstown (**Q**) + Southampton (**S**) here instead comparing all three separately! So the other average fare is for all non-Cherbourg passengers:
+
+```{r}
+
+# Average fare for all non-Cherbourg passengers
+avg_fare_other <- filter(titanic, PortOfEmbarkation != "C") %>% 
+  select(Fare) %>% 
+  pull() %>%
+  mean()
+
+print(avg_fare_other)
+
+```
+
+You could also calculate this using a logical OR (`|`) or using the `%in%` operator:
+
+```{r}
+# For the other ports, we can either extend our filter conditions...
+filter(titanic, PortOfEmbarkation == "Q" | PortOfEmbarkation == "S") %>% 
+  select(Fare) %>% 
+  pull() %>%
+  mean()
+
+# ...or we can define a vector of the relevant values
+other_ports <- c("Q", "S")
+filter(titanic, PortOfEmbarkation %in% other_ports) %>% 
+  select(Fare) %>% 
+  pull() %>%
+  mean()
+
+```
+
+However you calculate it, the average French fare was `r round(avg_fare_C, digits = 1)` GBP while the average for the other passengers was `r round(avg_fare_other, digits = 1)` GBP.

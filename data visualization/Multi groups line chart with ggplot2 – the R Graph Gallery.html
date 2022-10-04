@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/analytics.js"></script><script async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/apstag.js"></script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="">var __ez=__ez||{};__ez.stms=Date.now();__ez.evt={};__ez.script={};__ez.ck=__ez.ck||{};__ez.template={};__ez.template.isOrig=false;__ez.queue=function(){var e=0,i=0,t=[],n=!1,s=[],r=[],o=!0,a=function(e,i,n,s,r,o,a){var l=this;this.name=e,this.funcName=i,this.parameters=null===n?null:n instanceof Array?n:[n],this.isBlock=s,this.blockedBy=r,this.deleteWhenComplete=o,this.isError=!1,this.isComplete=!1,this.isInitialized=!1,this.proceedIfError=a,this.isTimeDelay=!1,this.process=function(){u("... func = "+e),l.isInitialized=!0,l.isComplete=!0,u("... func.apply: "+e);var i=l.funcName.split("."),n=null;i.length>3||(n=3===i.length?window[i[0]][i[1]][i[2]]:2===i.length?window[i[0]][i[1]]:window[l.funcName]),null!=n&&n.apply(null,this.parameters),!0===l.deleteWhenComplete&&delete t[e],!0===l.isBlock&&(u("----- F'D: "+l.name),f())}},l=function(e,i,t,n,s,r,o){var a=this;this.name=e,this.path=i,this.async=s,this.defer=r,this.isBlock=t,this.blockedBy=n,this.isInitialized=!1,this.isError=!1,this.isComplete=!1,this.proceedIfError=o,this.isTimeDelay=!1,this.isPath=function(e){return"/"===e[0]&&"/"!==e[1]},this.getSrc=function(e){return void 0!==window.__ezScriptHost&&this.isPath(e)?window.__ezScriptHost+e:e},this.process=function(){a.isInitialized=!0,u("... file = "+e);var i=document.createElement("script");i.src=this.getSrc(this.path),!0===s?i.async=!0:!0===r&&(i.defer=!0),i.onerror=function(){u("----- ERR'D: "+a.name),a.isError=!0,!0===a.isBlock&&f()},i.onreadystatechange=i.onload=function(){var e=i.readyState;u("----- F'D: "+a.name),e&&!/loaded|complete/.test(e)||(a.isComplete=!0,!0===a.isBlock&&f())},document.getElementsByTagName("head")[0].appendChild(i)}},c=function(e,i){this.name=e,this.path="",this.async=!1,this.defer=!1,this.isBlock=!1,this.blockedBy=[],this.isInitialized=!0,this.isError=!1,this.isComplete=i,this.proceedIfError=!1,this.isTimeDelay=!1,this.process=function(){}};function d(e){!0!==h(e)&&0!=o&&e.process()}function h(e){if(!0===e.isTimeDelay&&!1===n)return u(e.name+" blocked = TIME DELAY!"),!0;if(e.blockedBy instanceof Array)for(var i=0;i<e.blockedBy.length;i++){var s=e.blockedBy[i];if(!1===t.hasOwnProperty(s))return u(e.name+" blocked = "+s),!0;if(!0===e.proceedIfError&&!0===t[s].isError)return!1;if(!1===t[s].isComplete)return u(e.name+" blocked = "+s),!0}return!1}function u(e){var i=window.location.href,t=new RegExp("[?&]ezq=([^&#]*)","i").exec(i);"1"===(t?t[1]:null)&&console.debug(e)}function f(){++e>200||(u("let's go"),m(s),m(r))}function m(e){for(var i in e)if(!1!==e.hasOwnProperty(i)){var t=e[i];!0===t.isComplete||h(t)||!0===t.isInitialized||!0===t.isError?!0===t.isError?u(t.name+": error"):!0===t.isComplete?u(t.name+": complete already"):!0===t.isInitialized&&u(t.name+": initialized already"):t.process()}}return window.addEventListener("load",(function(){setTimeout((function(){n=!0,u("TDELAY -----"),f()}),5e3)}),!1),{addFile:function(e,i,n,o,a,c,h,u){var f=new l(e,i,n,o,a,c,h);!0===u?s[e]=f:r[e]=f,t[e]=f,d(f)},addDelayFile:function(e,i){var n=new l(e,i,!1,[],!1,!1,!0);n.isTimeDelay=!0,u(e+" ...  FILE! TDELAY"),r[e]=n,t[e]=n,d(n)},addFunc:function(e,n,o,l,c,h,u,f,m){!0===h&&(e=e+"_"+i++);var p=new a(e,n,o,l,c,u,f);!0===m?s[e]=p:r[e]=p,t[e]=p,d(p)},addDelayFunc:function(e,i,n){var s=new a(e,i,n,!1,[],!0,!0);s.isTimeDelay=!0,u(e+" ...  FUNCTION! TDELAY"),r[e]=s,t[e]=s,d(s)},items:t,processAll:f,setallowLoad:function(e){o=e},markLoaded:function(e){if(e&&0!==e.length){if(e in t){var i=t[e];!0===i.isComplete?u(i.name+" "+e+": error loaded duplicate"):(i.isComplete=!0,i.isInitialized=!0)}else t[e]=new c(e,!0);u("markLoaded dummyfile: "+t[e].name)}},logWhatsBlocked:function(){for(var e in t)!1!==t.hasOwnProperty(e)&&h(t[e])}}}();__ez.evt.add=function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n()},__ez.evt.remove=function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent?e.detachEvent("on"+t,n):delete e["on"+t]};__ez.script.add=function(e){var t=document.createElement("script");t.src=e,t.async=!0,t.type="text/javascript",document.getElementsByTagName("head")[0].appendChild(t)};__ez.dot={};</script>
+<script data-ezscrex="false" data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript">__ez.queue.addFile('fads.js', '/porpoiseant/fads.js?gcb=195-0&cb=5', true, [], true, false, false, true);</script><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/fads.js" async=""></script>
+<script>var __ezaps=[{"slotID":"div-gpt-ad-r_graph_gallery_com-medrectangle-2-0","divID":"","slotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-2","sizes":[[728,90]]},{"slotID":"div-gpt-ad-r_graph_gallery_com-box-2-0","divID":"","slotName":"/1254144,22669461101/r_graph_gallery_com-box-2","sizes":[[970,250],[970,90],[728,90]]},{"slotID":"div-gpt-ad-r_graph_gallery_com-medrectangle-1-0","divID":"","slotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","sizes":[[300,250]]},{"slotID":"div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1","divID":"","slotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","sizes":[[300,250]]},{"slotID":"div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2","divID":"","slotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","sizes":[[300,250]]}];var __ezapsVideo=[];__ezapid='aa05931b-5308-4ea3-95a2-adf84f4ffde4';</script>
+<script data-ezscrex="false" async="" data-pagespeed-no-defer="" type="text/javascript" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/austin.js"></script>
+<script>window.ezslots_raw=[];var __sellerid='1f6bccd0481a1bb91269eadde3bc017a';var __schain_domain='r-graph-gallery.com';var __ez_nid ='1254144';__advertiserRule=[''];var ezasVars = {'cid':'9939358562','pid':'pub-3523953066677938','ssid':44};window.google_reactive_ads_global_state = {
+                adCount: {},
+                floatingAdsStacking: { maxZIndexListeners: [], maxZIndexRestrictions: {}, nextRestrictionId: 0 },
+                messageValidationEnabled: false,
+                reactiveTypeDisabledByPublisher: {},
+                reactiveTypeEnabledInAsfe: {},
+                sideRailAvailableSpace: [],
+                sideRailOverlappableElements: [],
+                stateForType: {},
+                tagSpecificState: {},
+                wasPlaTagProcessed: true,
+                wasReactiveAdConfigReceived: { 1: true, 2: true, 8: true },
+                wasReactiveAdVisible: {},
+                wasReactiveTagRequestSent: true,
+                description: "Can't disable auto ads programmatically on the page, so here we are!"
+            };!function(){window.ezasvEvent=function(e,t){if(!0===e[0].isIntersecting){var i=e[0].target.attributes[0].value.substr(0,e[0].target.attributes[0].value.length-9);window.ezoSTPixelAdd(i,"viewed",1),t.disconnect()}},window.ezaslEvent=function(e,t){if(void 0!==e[0].target.attributes["data-ad-status"]){var i=e[0].target.attributes["data-ad-status"].value,o=e[0].target.attributes[0].value.substr(0,e[0].target.attributes[0].value.length-9);"filled"==i&&(window.ezoSTPixelAdd(o,"loaded",1),new IntersectionObserver(window.ezasvEvent,{threshold:[1]}).observe(document.getElementById(o+"-asloaded"))),"unfilled"==i&&setTimeout((function(){window.ezoAdBackFill(e)}),2e3),t.disconnect()}},window.ezoAdBackFill=function(e){var t=e[0].target,i=t.parentElement;t.style.display="none !important";var o,d=ezoGetSlotNum(i.id);if(o=void 0!==__ez.fads?__ez.fads.initslots[i.id]:__ez_fad_initslot[i.id],void 0===d&&"function"==typeof o&&(d=o(6)),void 0!==d)var n=window[d];if(void 0!==n){n.setTargeting("compid","0"),n.setTargeting("bkfl","1"),n.setTargeting("reft","t");var a=n.getTargeting("br2")[0];void 0!==window.ezoibfh&&void 0!==window.ezoibfh[a]&&(n.setTargeting("br1",a),n.setTargeting("eb_br",window.ezoibfh[a])),googletag.display(n),setTimeout((function(){googletag.pubads().refresh([n])}),500)}},window.ezoSTPixels=[];var e=setInterval((function(){"undefined"!=typeof __ez&&"undefined"!=typeof __ezDotData&&"undefined"!=typeof ezslots&&window.ezslots_raw.length>0&&(window.ezoSTPixelFire(),clearInterval(e))}),250);window.ezoSTPixelAdd=function(e,t,i){window.ezoSTPixels.push({id:e,name:t,value:i}),window.ezoSTPixelFire()},window.ezoGetSlotById=function(e){var t=e.split("div-gpt-ad-")[1].split("-",3).join("-");for(s in window.ezslots_raw)if(window.ezslots_raw[s].tap.includes(t))return window.ezslots_raw[s]},window.ezoGetSlotNum=function(e){if(void 0!==window.ezslots&&0!=window.ezslots)for(var t=0;t<window.ezslots.length;t++){var i=window[ezslots[t]];if(void 0!==i){var o=i.getSlotElementId();if(void 0!==o&&o==e)return ezslots[t]}}},window.ezoSTPixelFire=function(){if("undefined"!=typeof __ez&&"undefined"!=typeof __ezDotData&&"undefined"!=typeof ezslots)for(;window.ezoSTPixels.length>0;){var e=window.ezoSTPixels.shift(),t=window.ezoGetSlotById(e.id);if(void 0===t){var i;if(i=void 0!==__ez.fads?__ez.fads.initslots[e.id]:__ez_fad_initslot[e.id],void 0===googletag.defineSlot)return void window.ezoSTPixels.push(e);if(i(1),void 0===(t=window.ezoGetSlotById(e.id)))return void window.ezoSTPixels.push(e)}var o=[{type:"impression",impression_id:t.eid,domain_id:window.did.toString(),unit:e.id,t_epoch:__ez.dot.getEpoch(0),ad_position:parseInt(t.ap),country_code:__ez.dot.getCC(),pageview_id:__ez.dot.getPageviewId(),comp_id:1,data:__ez.dot.dataToStr([new __ezDotData(e.name,e.value.toString())]),is_orig:0}],d=__ez.dot.getURL("/porpoiseant/army.gif")+"?orig=0&sts="+btoa(JSON.stringify(o));__ez.dot.Fire(d)}}}();</script>
+<script>!function(){var e=setInterval((function(){var t=document.querySelectorAll('[id^="outbrain_widget_"]');0!==t.length&&(function(e){e.forEach((function(e){if(e.parentElement.hasAttribute("data-ez-name")){var t=e.parentElement.attributes["data-ez-name"].value;new IntersectionObserver((function(e,n){e[0].isIntersecting&&(i({unit:t,name:"viewed"}),n.disconnect())}),{threshold:[1]}).observe(e);var n=e.attributes["data-widget-id"].value;window.OBREvents=window.OBREvents||[],OBREvents.push({event:"widgetDataReturned",widgetId:n,func:function(){i({unit:t,name:"loaded"})}})}}))}(t),clearInterval(e))}),250),t=[],n=setInterval((function(){"undefined"!=typeof __ez&&"undefined"!=typeof _ezim_d&&"undefined"!=typeof __ezDotData&&(d(),clearInterval(n))}),2500);function i(e){t.push(e),d()}function d(){var e,n;if(0!==t.length&&"undefined"!=typeof __ez&&"undefined"!=typeof _ezim_d&&"undefined"!=typeof __ezDotData)for(;t.length>0;){var i=t.shift(),d=(e=i.unit,n=i.name,[{type:"impression",impression_id:_ezim_d[e].full_id.split("/")[2],domain_id:window.did.toString(),unit:e,t_epoch:__ez.dot.getEpoch(0),ad_position:_ezim_d[e].position_id,country_code:__ez.dot.getCC(),pageview_id:__ez.dot.getPageviewId(),comp_id:2,data:__ez.dot.dataToStr([new __ezDotData(n,"1")]),is_orig:0}]);__ez.dot.Fire(__ez.dot.getURL("/porpoiseant/army.gif")+"?orig="+(!0===__ez.template.isOrig?1:0)+"&sts="+btoa(JSON.stringify(d)))}}}();</script>
+<script>window.ezhbopt=true;</script>
+<script>window.ezpbCache=true;</script>
+<link href="https://ad.doubleclick.net/" rel="dns-prefetch">
+<link href="https://pagead2.googlesyndication.com/" rel="dns-prefetch">
+<link href="https://googleads.g.doubleclick.net/" rel="dns-prefetch">
+<link href="https://tpc.googlesyndication.com/" rel="dns-prefetch">
+<link href="https://adservice.google.com/" rel="dns-prefetch">
+<link href="https://secureads.g.doubleclick.net/" rel="dns-prefetch">
+<link href="https://www.googletagservices.com/" rel="dns-prefetch">
+<link rel="preload" as="script" href="https://securepubads.g.doubleclick.net/tag/js/gpt.js">
+<link rel="preload" as="script" href="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/dall.js" onerror="window.ezDallErr=true">
+<link rel="preload" as="script" href="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/fads.js">
+<script type="text/javascript">
+	var __banger_pmp_deals=function(){var d={17:{"DealId":17,"Floor":160},18:{"DealId":18,"Floor":25},19:{"DealId":19,"Floor":100},20:{"DealId":20,"Floor":300},1428:{"DealId":1428,"Floor":25},2310:{"DealId":2310,"Floor":400},2351:{"DealId":2351,"Floor":155},2526:{"DealId":2526,"Floor":300},2527:{"DealId":2527,"Floor":300},2610:{"DealId":2610,"Floor":125},2688:{"DealId":2688,"Floor":100},2693:{"DealId":2693,"Floor":50},2761:{"DealId":2761,"Floor":200},2763:{"DealId":2763,"Floor":250},2764:{"DealId":2764,"Floor":325},2765:{"DealId":2765,"Floor":400},3044:{"DealId":3044,"Floor":175},3045:{"DealId":3045,"Floor":75},3052:{"DealId":3052,"Floor":20},3053:{"DealId":3053,"Floor":37},3154:{"DealId":3154,"Floor":275},3684:{"DealId":3684,"Floor":375},3856:{"DealId":3856,"Floor":15},732:{"DealId":732,"Floor":100},2339:{"DealId":2339,"Floor":800},3054:{"DealId":3054,"Floor":555},3455:{"DealId":3455,"Floor":475},3456:{"DealId":3456,"Floor":525},3457:{"DealId":3457,"Floor":600},3682:{"DealId":3682,"Floor":650},3683:{"DealId":3683,"Floor":1000}};return[{"SlotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-2","Deals":[d[17],d[18],d[19],d[20],d[1428],d[2310],d[2351],d[2526],d[2527],d[2610],d[2688],d[2693],d[2761],d[2763],d[2764],d[2765],d[3044],d[3045],d[3052],d[3053],d[3154],d[3684],d[3856],d[732]]},{"SlotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","Deals":[d[17],d[18],d[19],d[20],d[1428],d[2310],d[2339],d[2351],d[2526],d[2527],d[2610],d[2688],d[2693],d[2761],d[2763],d[2764],d[2765],d[3044],d[3045],d[3052],d[3053],d[3054],d[3154],d[3455],d[3456],d[3457],d[3682],d[3683],d[3684],d[3856],d[732]]},{"SlotName":"/1254144,22669461101/r_graph_gallery_com-box-2","Deals":[d[17],d[18],d[19],d[20],d[1428],d[2310],d[2339],d[2351],d[2526],d[2527],d[2610],d[2688],d[2693],d[2761],d[2763],d[2764],d[2765],d[3044],d[3045],d[3052],d[3053],d[3054],d[3154],d[3455],d[3456],d[3457],d[3682],d[3684],d[3856],d[732]]},{"SlotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","Deals":[d[17],d[18],d[19],d[20],d[1428],d[2310],d[2339],d[2351],d[2526],d[2527],d[2610],d[2688],d[2693],d[2761],d[2763],d[2764],d[2765],d[3044],d[3045],d[3052],d[3053],d[3054],d[3154],d[3455],d[3456],d[3457],d[3682],d[3683],d[3684],d[3856],d[732]]},{"SlotName":"/1254144,22669461101/r_graph_gallery_com-medrectangle-1","Deals":[d[17],d[18],d[19],d[20],d[1428],d[2310],d[2339],d[2351],d[2526],d[2527],d[2610],d[2688],d[2693],d[2761],d[2763],d[2764],d[2765],d[3044],d[3045],d[3052],d[3053],d[3054],d[3154],d[3455],d[3456],d[3457],d[3682],d[3683],d[3684],d[3856],d[732]]}]}();
+</script>
+<script type="text/javascript">_ebcids=[138231308856,138231308940,138231308949,138231387842,138231421744,138231421759,138231421774,138231421783,138231421789,138231421792,138242067587,138242067590,138242067602,138242067605,138242067608,138242067614,138242229406,138242229415,138242229421,138242229430];</script>
+<script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">ezobv=163;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">__ez.fads=window.__ez.fads||{cmd:[],initslots:{},kvStore:{},divs:[[],[],[],[],[],[],[]],divsd:[],fadcount:0};var ez_ad_units=[];var ezslots=[];var ezrpos=[];var ezsrqt={};var __ez_fad_haspo=false;var __ez_fad_hascp=false;if(typeof PerformanceObserver!='undefined'&&typeof PerformanceObserver.supportedEntryTypes!='undefined'){if(PerformanceObserver.supportedEntryTypes.indexOf('largest-contentful-paint')>-1){__ez_fad_haspo=true;}}
+try{var __ez_fad_po=new PerformanceObserver((entryList)=>{window.__ez_fad_hascp=true;__ez.fads.cmd.push(function(){__ez.fads.__ez_fad_hascp=true;});});__ez_fad_po.observe({type:'largest-contentful-paint',buffered:true});}catch(e){}
+var __ez_fad_floatshowd=false;__ez.fads.__ez_fad_floatshow=function(d){if(__ez_fad_floatshowd===true||typeof __ez_fad_floating==='undefined'){return;}
+__ez_fad_floatshowd=true;var e=document.getElementById('ezmobfooter');if(e!=null){e.classList.add('ezmobtrans');}else{head=document.head||document.getElementsByTagName('head')[0],style=document.createElement('style');head.appendChild(style);var css="body > #ezmobfooter{bottom:0px;visibility:visible;}";style.type='text/css';if(style.styleSheet){style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}}
+googletag.cmd.push(function(){for(var i=0;i<__ez_fad_floating.length;i++){var s=__ez.fads.initslots[__ez_fad_floating[i]](null);googletag.display(__ez_fad_floating[i]);if(typeof window.adjustHbValues==='function'){window.adjustHbValues(window[s]);}
+googletag.pubads().refresh([window[s]]);}});};function __ez_fad_csnt(){return document.cookie.indexOf('ezCMPCookieConsent')!==-1||typeof __ez_conestreq=='undefined';}
+function __ez_fad_rdy(){var h=document.documentElement.scrollHeight;var vh=window.innerHeight||Math.max(document.documentElement.clientHeight,document.body.clientHeight);if(document.body!==null&&(__ez_fad_haspo===false&&h>vh||__ez_fad_hascp||document.readyState==='complete')){return true;}}
+function __ez_fad_position(id){if(__ez.fads.loaded){__ez.fads.cmd.push(function(){__ez.fads.__ez_fad_position(id);});return;}
+__ez.fads.fadcount++;var did=document.getElementById(id);if(did===null){return;}
+var rect=did.getBoundingClientRect();var vs=window.scrollY||document.body.scrollTop||document.documentElement.scrollTop;var vh=vs+window.screen.height;var vw=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;var vh=window.innerHeight||Math.max(document.documentElement.clientHeight,document.body.clientHeight);if(rect.top>=vh){__ez.fads.cmd.push(function(){__ez.fads.__ez_fad_position(id);});return;}
+__ez.fads.divs[0].push(id);__ez.fads.divsd.push(id);if(!__ez_fad_csnt()||!__ez_fad_rdy()){setTimeout(function(){__ez_fad_display(id);},50);return;}
+__ez_fad_display(id);}
+function __ez_fad_display(id){if(!__ez_fad_csnt()||!__ez_fad_rdy()){setTimeout(function(){__ez_fad_display(id);},50);return;}
+__ez_fad_gpt();if(__ez_fad_floating.indexOf(id)!==-1){setTimeout(__ez.fads.__ez_fad_floatshow,0);return;}
+googletag.cmd.push(function(){var sn=__ez.fads.initslots[id](0);if(!sn){return;}
+var s=window[sn];googletag.display(id);if(typeof window.ezasBuild==='function'){if(window.ezasBuild(s)){return;}}
+if(typeof window.adjustHbValues==='function'){window.adjustHbValues(s);}
+googletag.pubads().refresh([s]);});}
+function ezSetTargetingFromMap(slot,obj){if(typeof slot==='undefined'){return;}
+for(var key in obj){if(!obj.hasOwnProperty(key)){continue;}
+slot.setTargeting(key,obj[key]);}}
+function ezSetSlotTargeting(divid,key,value){var slot=ezGetSlotById(divid);if(slot){slot.setTargeting(key,value);}else{if(typeof __ez.fads.kvStore[divid]=='undefined'){__ez.fads.kvStore[divid]={};}
+__ez.fads.kvStore[divid][key]=value;}}
+function ezGetSlotById(id){if(typeof window.ezslots==='undefined'||window.ezslots==0){return;}
+for(var i=0;i<window.ezslots.length;i++){var slot=window[ezslots[i]];if(typeof slot==='undefined'){continue;}
+var slotId=slot.getSlotElementId();if(typeof slotId!=='undefined'&&slotId==id){return slot;}}}
+function __ez_close_anchor(){googletag.cmd.push(function(slot){for(var i=0;i<window.ezslots.length;i++){var slot=window[ezslots[i]];if(typeof slot==='undefined'){continue;}
+var alS=slot.getTargeting('al')[0]%1000;if(alS==5){googletag.destroySlots([slot]);}}
+if(typeof(__ez_set_outstream_floor)!=='undefined'){__ez_set_outstream_floor(0);}
+var anchor=document.getElementById('ezmobfooter');if(!anchor){return;}
+anchor.innerHTML='';var styleElement=document.getElementById('ezoicCSS');if(!styleElement){return;}
+var cert=document.getElementById('ezoic-certification-fixed');if(cert){cert.style.bottom='15px';}
+var styles=styleElement.sheet?styleElement.sheet:styleElement.styleSheet;for(var i=0;i<styles.cssRules.length;i++){var rules=styles.cssRules[i];if(rules.selectorText==='body'&&rules.style.height==='auto'&&(rules.style.paddingTop!==''||rules.style.paddingBottom!=='')){styles.deleteRule(i);}}});}</script><script type="text/javascript" data-ezscrex="false">var ezorbf = [];  var ezoplbfh = []; </script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.isEZABL=false;window.ezmadspc=300;window.ezoViewCheck=false;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.ezDisableInitialLoad=false;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.googletag=window.googletag||{};googletag.cmd=googletag.cmd||[];</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.ezogetbrkey = function(s){ var k = 'br1';var k2 = 'eb_br';if(window.ezogtk == ""){k='br1u';k2='eb_bru';}else if(window.ezogtk != "NT"){k='br1t';k2='eb_brt';} s.setTargeting('br1', s.getTargeting(k));s.setTargeting('eb_br', s.getTargeting(k2));};googletag.cmd.push(function() {ezslot_interstitial = googletag.defineOutOfPageSlot('/1254144,22669461101/r_graph_gallery_com-pixel1',googletag.enums.OutOfPageFormat.INTERSTITIAL); if(ezslot_interstitial != null) {ezslot_interstitial.addService(googletag.pubads()).setTargeting('ga', '2497208').setTargeting('bra', 'mod1-c').setTargeting('ap', '9999').setTargeting('ezoic', '1').setTargeting('eb_br', '8b07bae800b215e481d05a271b3e723b').setTargeting('iid1', '5165979064248110').setTargeting('tap', 'r_graph_gallery_com-pixel1-5165979064248110').setTargeting('bvr', '8').setTargeting('ic', '1').setTargeting('br1', '700');}
+		googletag.pubads().enableSingleRequest();googletag.pubads().addEventListener('slotRenderEnded', function(event) { __ez.queue.addFunc("ezbanger", "ezbanger", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('impressionViewable', function(event) { __ez.queue.addFunc("ezvb", "ezvb", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotResponseReceived', function(event) { __ez.queue.addFunc("ezsr", "ezsr", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotRequested', function(e) { window.ezsrqt[e.slot.getSlotElementId()] = Date.now();});googletag.pubads().disableInitialLoad();googletag.pubads().disableInitialLoad();googletag.enableServices();});window.ezoll = false;window.ezoadxnc = '1254144';window.ezoadhb = '1100';var ezaxmns={};var ezaucmns={};
+
+		var __ez_fad_floating = ['div-gpt-ad-r_graph_gallery_com-medrectangle-2-0'];
+		var __ez_fad_gptd = __ez_fad_gptd || false;var __ez_fad_ezpbinitd = false;var __ez_fad_pbt = setTimeout(function(){__ez_fad_pb();},5000);function __ez_fad_gpt(){if(__ez_fad_gptd == false){__ez_fad_gptd=true;!function(){var t=document.createElement("script");t.async=!0,t.type="text/javascript";var e="https:"==document.location.protocol;t.src=(e?"https:":"http:")+"//securepubads.g.doubleclick.net/tag/js/gpt.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(t,c)}();}}function __ez_fad_pb(){if(__ez_fad_ezpbinitd==false && typeof __ez_fad_ezpbinit == 'function'){__ez_fad_ezpbinitd = true;__ez_fad_ezpbinit()}};
+		
+	function __ez_init_slot(bvr, did, slotNum, defineFunc) {
+		googletag.cmd.push(function() {
+			defineFunc();
+			ezrpos[slotNum]=slotNum;
+			ezslots.push("ezslot_" + slotNum);
+			if(__ez.fads.kvStore[did] !== 'undefined') {
+				for (var name in __ez.fads.kvStore[did]) {
+					if (!__ez.fads.kvStore.hasOwnProperty(name)) {
+						ezSetSlotTargeting(did, name, __ez.fads.kvStore[did][name]);
+					}
+				}
+				__ez.fads.kvStore[did] = {};
+			}
+		});return "ezslot_" + slotNum;
+	}
+__ez.fads.initslots['div-gpt-ad-r_graph_gallery_com-box-2-0'] = function(bvr){
+				var defScript = function() {ezslot_1 = googletag.defineSlot('/1254144,22669461101/r_graph_gallery_com-box-2',[970,250],'div-gpt-ad-r_graph_gallery_com-box-2-0').addService(googletag.pubads()).setCollapseEmptyDiv(false);var ezslot_1_raw = {'a':'1','iid1':'6453637330185980','eid':'6453637330185980','t':'134','d':'242358','t1':'134','pvc':'1','ap':'1102','sap':'1102','a':'|0|','as':'revenue','plat':'1','bra':'mod1-c','ic':'1','at':'mbf','adr':'399','ezosn':'1','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'1','al':'1001','compid':'0','tap':'r_graph_gallery_com-box-2-6453637330185980','eb_br':'dc3573d5dc41abdf97751be02f53537f','eba':'1','ebss':[10017,10082,10061,10015,10063,11307],'asau':'5189037877','bv':'0','bvm':'4','bvr':'9','shp':'1','ftsn':'12','ftsng':'12','acptad':'1','br1':'800','br2':'400','ezoic':'1','nmau':'0','mau':'0','stl':[77,193,0,4,0,193,196,20,71,201,192,31,902,903,901,902,903],'deal1':[21,22,23,24,25,26,919,1794,3430,3458,3460,3683,3919,3933,2030,774],'ax_ssid':'10082'}; window.ezslots_raw.push( ezslot_1_raw);ezSetTargetingFromMap(ezslot_1,ezslot_1_raw);};
+				return __ez_init_slot(bvr,'div-gpt-ad-r_graph_gallery_com-box-2-0',1, defScript);
+			};__ez.fads.initslots['div-gpt-ad-r_graph_gallery_com-medrectangle-2-0'] = function(bvr){
+				var defScript = function() {ezslot_0 = googletag.defineSlot('/1254144,22669461101/r_graph_gallery_com-medrectangle-2',[728,90],'div-gpt-ad-r_graph_gallery_com-medrectangle-2-0').addService(googletag.pubads()).setCollapseEmptyDiv(false);var ezslot_0_raw = {'a':'1','iid1':'2050239756183138','eid':'2050239756183138','t':'134','d':'242358','t1':'134','pvc':'1','ap':'1100','sap':'1100','a':'|0|','as':'revenue','plat':'1','bra':'mod1-c','ic':'1','at':'mbf','adr':'399','ezosn':'0','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'5','al':'1005','compid':'0','tap':'r_graph_gallery_com-medrectangle-2-2050239756183138','eb_br':'6e85b37de1b1ffc2593baa5d6e4b02fc','eba':'1','ebss':[10017,10082,10061,10015,10063,11307],'asau':'5189037877','bv':'0','bvm':'2','bvr':'3','shp':'1','ftsn':'12','ftsng':'12','br1':'450','br2':'220','ezoic':'1','nmau':'0','mau':'0','stl':[33,25,169,27,186,131,0,20,26,171,0,0,172,137,901,902,903],'deal1':[21,22,23,24,25,26,27,28,29,30,760,761,813,814,815,816,817,818,819,899,917,918,919,1794,2339,3054,3430,3455,3456,3457,3458,3460,3682,3683,3933,2030,774],'ax_ssid':'10082'}; window.ezslots_raw.push( ezslot_0_raw);ezSetTargetingFromMap(ezslot_0,ezslot_0_raw);};
+				return __ez_init_slot(bvr,'div-gpt-ad-r_graph_gallery_com-medrectangle-2-0',0, defScript);
+			};__ez.fads.initslots['div-gpt-ad-r_graph_gallery_com-medrectangle-1-0'] = function(bvr){
+				var defScript = function() {ezslot_2 = googletag.defineSlot('/1254144,22669461101/r_graph_gallery_com-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0').addService(googletag.pubads()).setCollapseEmptyDiv(false);var ezslot_2_raw = {'a':'1','iid1':'4839868194178989','eid':'4839868194178989','t':'134','d':'242358','t1':'134','pvc':'1','ap':'1111','sap':'1111','a':'|0|','as':'revenue','plat':'1','bra':'mod1-c','ic':'1','at':'mbf','adr':'399','ezosn':'2','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'r_graph_gallery_com-medrectangle-1-4839868194178989','eb_br':'39abb99448d54704c4afa42efe76e15d','eba':'1','ebss':[10017,10082,10061,10015,10063,11307],'asau':'5189037877','bv':'0','bvm':'4','bvr':'5','shp':'3','ftsn':'12','ftsng':'12','acptad':'1','br1':'1100','br2':'550','ezoic':'1','nmau':'3','mau':'0','stl':[157,168,0,4,0,193,196,20,71,201,192,31,902,903,901,902,903],'deal1':[21,22,23,24,25,26,919,1794,3430,3458,3460,2030,774],'ax_ssid':'10082'}; window.ezslots_raw.push( ezslot_2_raw);ezSetTargetingFromMap(ezslot_2,ezslot_2_raw);};
+				return __ez_init_slot(bvr,'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0',2, defScript);
+			};__ez.fads.initslots['div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1'] = function(bvr){
+				var defScript = function() {ezslot_3 = googletag.defineSlot('/1254144,22669461101/r_graph_gallery_com-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1').addService(googletag.pubads()).setCollapseEmptyDiv(false);var ezslot_3_raw = {'a':'1','iid1':'4839868194178989','eid':'4839868194178989','t':'134','d':'242358','t1':'134','pvc':'1','ap':'1111','sap':'1111','a':'|0|','as':'revenue','plat':'1','bra':'mod1-c','ic':'1','at':'mbf','adr':'399','ezosn':'3','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'r_graph_gallery_com-medrectangle-1-4839868194178989','eb_br':'39abb99448d54704c4afa42efe76e15d','eba':'1','ebss':[10017,10082,10061,10015,10063,11307],'asau':'5189037877','bv':'0','bvm':'4','bvr':'5','shp':'3','ftsn':'12','ftsng':'12','acptad':'1','br1':'1100','br2':'550','ezoic':'1','nmau':'3','mau':'1','stl':[157,168,0,4,0,193,196,20,71,201,192,31,902,903,901,902,903],'deal1':[21,22,23,24,25,26,919,1794,3430,3458,3460,2030,774],'ax_ssid':'10082'}; window.ezslots_raw.push( ezslot_3_raw);ezSetTargetingFromMap(ezslot_3,ezslot_3_raw);};
+				return __ez_init_slot(bvr,'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1',3, defScript);
+			};__ez.fads.initslots['div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2'] = function(bvr){
+				var defScript = function() {ezslot_4 = googletag.defineSlot('/1254144,22669461101/r_graph_gallery_com-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2').addService(googletag.pubads()).setCollapseEmptyDiv(false);var ezslot_4_raw = {'a':'1','iid1':'4839868194178989','eid':'4839868194178989','t':'134','d':'242358','t1':'134','pvc':'1','ap':'1111','sap':'1111','a':'|0|','as':'revenue','plat':'1','bra':'mod1-c','ic':'1','at':'mbf','adr':'399','ezosn':'4','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'r_graph_gallery_com-medrectangle-1-4839868194178989','eb_br':'39abb99448d54704c4afa42efe76e15d','eba':'1','ebss':[10017,10082,10061,10015,10063,11307],'asau':'5189037877','bv':'0','bvm':'4','bvr':'5','shp':'3','ftsn':'12','ftsng':'12','acptad':'1','br1':'1100','br2':'550','ezoic':'1','nmau':'3','mau':'2','stl':[157,168,0,4,0,193,196,20,71,201,192,31,902,903,901,902,903],'deal1':[21,22,23,24,25,26,919,1794,3430,3458,3460,2030,774],'ax_ssid':'10082'}; window.ezslots_raw.push( ezslot_4_raw);ezSetTargetingFromMap(ezslot_4,ezslot_4_raw);};
+				return __ez_init_slot(bvr,'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2',4, defScript);
+			};</script>
+<script type="text/javascript">(function(){function storageAvailable(type){var storage;try{storage=window[type];var x='__storage_test__';storage.setItem(x,x);storage.removeItem(x);return true;}
+catch(e){return e instanceof DOMException&&(e.code===22||e.code===1014||e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED')&&(storage&&storage.length!==0);}}
+function remove_ama_config(){if(storageAvailable('localStorage')){localStorage.removeItem("google_ama_config");}}
+remove_ama_config()})()</script>
+<script type="text/javascript">var ezoicTestActive = true</script>
+<script data-ezscrex="false" type="text/javascript" data-cfasync="false">var _ezaq = {"ad_cache_level":2,"ad_count_adjustment":2,"ad_lazyload_version":-1,"ad_load_version":1,"ad_location_ids":"6,5,1,4,4,4","ad_transform_level":0,"adx_ad_count":5,"bidder_method":1,"bidder_version":1,"city":"","country":"DK","days_since_last_visit":-1,"display_ad_count":2,"domain_id":242358,"domain_test_group":20230801,"ds_adsize_opt_id":-1,"engaged_time_visit":0,"ezcache_level":2,"ezcache_skip_code":0,"form_factor_id":1,"framework_id":1,"has_bad_image":0,"has_bad_words":0,"iab_category":"","is_from_recommended_pages":false,"is_return_visitor":false,"is_sitespeed":0,"last_page_load":"","last_pageview_id":"","lt_cache_level":0,"max_ads":6,"metro_code":0,"optimization_version":1,"page_ad_positions":"1006,1100,1102,1111,1111,1111","page_view_count":1,"page_view_id":"8d72b58e-73ae-4fbc-7365-d90807a83f93","position_selection_id":46,"postal_code":"","pv_event_count":0,"response_size_orig":18659,"response_time_orig":2,"serverid":"52.58.239.207:20185","state":"81","sub_page_ad_positions":"1006,1100,1102,1111,1111,1111","t_epoch":1664869369,"template_id":134,"time_on_site_visit":0,"url":"https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html","user_id":0,"word_count":456,"worst_bad_word_level":0};var _ezim_d = {"r_graph_gallery_com-box-2":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-box-2/2022-10-04/6453637330185980","height":"250","position_id":1102,"sub_position_id":1102,"width":"970"},"r_graph_gallery_com-medrectangle-1":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-medrectangle-1/2022-10-04/4839868194178989","position_id":1111,"sub_position_id":1111},"r_graph_gallery_com-medrectangle-1_1":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-medrectangle-1/2022-10-04/4839868194178989","position_id":1111,"sub_position_id":1111},"r_graph_gallery_com-medrectangle-1_2":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-medrectangle-1/2022-10-04/4839868194178989","position_id":1111,"sub_position_id":1111},"r_graph_gallery_com-medrectangle-2":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-medrectangle-2/2022-10-04/2050239756183138","height":"90","position_id":1100,"sub_position_id":1100,"width":"728"},"r_graph_gallery_com-pixel1":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"r_graph_gallery_com-pixel1/2022-10-04/5165979064248110","height":"3","position_id":1006,"sub_position_id":1006,"width":"3"}};var _ezat = {"domain_id":242358,"form_factor_id":1,"framework_id":1,"pageview_date":"2022-10-04","pageview_id":"8d72b58e-73ae-4fbc-7365-d90807a83f93","template_id":134,"url":"https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html","visit_uuid":"6de7a7d4-b1cc-4cb5-5a68-4f60a9c0010c"};</script><script data-ezscrex="false" data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript">__ez.queue.addFile('banger.js', '/porpoiseant/banger.js?cb=195-0&bv=163&v=66&PageSpeed=off', true, [], true, false, false, true);</script><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/banger.js" async=""></script>
+<script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="">!function(){var e;__ez.vep=(e=[],{Add:function(i,t){__ez.dot.isDefined(i)&&__ez.dot.isValid(t)&&e.push({type:"video",video_impression_id:i,domain_id:__ez.dot.getDID(),t_epoch:__ez.dot.getEpoch(0),data:__ez.dot.dataToStr(t)})},Fire:function(){if(void 0===document.visibilityState||"prerender"!==document.visibilityState){if(__ez.dot.isDefined(e)&&e.length>0)for(;e.length>0;){var i=5;i>e.length&&(i=e.length);var t=e.splice(0,i),o=__ez.dot.getURL("/detroitchicago/grapefruit.gif")+"?orig="+(!0===__ez.template.isOrig?1:0)+"&v="+btoa(JSON.stringify(t));__ez.dot.Fire(o)}e=[]}}})}();</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer=""></script>
+
+  <!-- Google Analytics + OutboundLink + Google Adsense -->
+  <script async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-79254642-1');
+  </script>
+  <script>
+  var getOutboundLink = function(url) {
+    gtag('event', 'click', {
+      'event_category': 'outbound',
+      'event_label': url,
+      'transport_type': 'beacon',
+      'event_callback': function(){document.location = url;}
+    });
+  }
+  </script>
+  
+  
+  <!-- Google Analytics + OutboundLink + Google Adsense -->
+
+
+
+<title>Multi groups line chart with ggplot2 – the R Graph Gallery</title>
+
+<meta name="generator" content="pandoc">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="This post explains how to build a line chart that represents several groups with ggplot2. It provides several examples with explanation and reproducible code.">
+<meta name="keywords" content="R,ggplot2,tidyverse,Example,Data,Dataviz,Datavisualization,Plot,Chart,Graph,Learning,Caveat,Pitfall,Mistake">
+<meta name="author" content="Yan Holtz">
+<link rel="icon" href="https://r-graph-gallery.com/img/logo/R_single_small.png">
+
+<!-- Control appearance when shared by social media -->
+<meta property="og:title" content="Multi groups line chart with ggplot2">
+<meta property="og:image" content="img/overview_RGG.png">
+<meta property="og:description" content="This post explains how to build a line chart that represents several groups with ggplot2. It provides several examples with explanation and reproducible code.">
+<meta property="og:url" content="https://www.r-graph-gallery.com/line-chart-several-groups-ggplot2.html">
+<meta property="og:type" content="website">
+
+<!-- Bootstrap core CSS -->
+<link href="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- Custom styles for this template -->
+<link href="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/agency.css" rel="stylesheet">
+
+<!-- JQUERY -->
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/jquery.min.js"></script>
+
+<style id="ezoicCSS">.ezoic-at-0{max-width:100% !important;float:none !important;line-height:0px;padding:0;min-width:970px;text-align:center !important;}
+.ezoic-ad.box-2102{margin-right:0px !important;margin-bottom:15px !important;margin-left:0px !important;display:block !important;margin-top:15px !important;min-height:250px;}
+.ezoic-ad.medrectangle-1111{background:0 0 !important;margin-top:15px !important !important;display:flex !important;width:970px;margin-left:auto !important;min-height:0px !important;margin-right:auto !important;margin-bottom:15px !important !important;justify-content:space-between;}
+.ezoic-ad.medrectangle-2100{display:inline-block;min-width:728px;min-height:90px;max-width:100% !important;line-height:0px;padding:0;float:none !important;}
+.ezoic-ad{display:inline-block;border:0px;}.ezoic-ad>div>iframe{margin:0px!important;padding:0px!important;}
+.ezmob-footer{position:fixed;left:0;bottom:0;width:100%;background:#fff;z-index:100000;line-height:0}.ezmob-footer-desktop{background-color:#fffc;border-top:1px solid #d3d3d3;padding-top:5px}.ezmob-footer-close{cursor:pointer;color:#b2b2b2;border:1px solid #b2b2b2;border-radius:20px;background:#fff;line-height:20px;display:inline-block;font-size:20px;font-family:arial,sans-serif;padding:0 5px;position:absolute;top:5px;right:5px;height:24px;width:21px;text-align:center}body {
+					padding-bottom: 100px !important;
+					height: auto;
+				}
+				</style><link rel="canonical" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html">
+<script type="text/javascript">
+			 (adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1;var __ez_conestreq=true;</script>
+<script type="text/javascript">var ezouid = "1";</script><!--<base href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html">--><base href="."><script type="text/javascript">
+var ezoTemplate = 'pub_site';
+if(typeof ezouid == 'undefined')
+{
+    var ezouid = 'none';
+}
+var ezoFormfactor = '1';
+var ezo_elements_to_check = Array();
+</script><!-- START EZHEAD -->
+<script data-ezscrex="false" type="text/javascript">
+var soc_app_id = '0';
+var did = 242358;
+var ezdomain = 'r-graph-gallery.com';
+var ezoicSearchable = 1;
+</script>
+<!--{jquery}-->
+<!-- END EZHEAD -->
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ezd.js" defer="" async=""></script>
+<script data-ezscrex="false" data-pagespeed-no-defer="" data-cfasync="false">
+function create_ezolpl(pvID, rv) {
+    var d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    __ez.ck.setByCat("ezux_lpl_242358=" + new Date().getTime() + "|" + pvID + "|" + rv + "; " + expires, 3);
+}
+function attach_ezolpl(pvID, rv) {
+    if (document.readyState === "complete") {
+        create_ezolpl(pvID, rv);
+    }
+    if(window.attachEvent) {
+        window.attachEvent("onload", create_ezolpl, pvID, rv);
+    } else {
+        if(window.onload) {
+            var curronload = window.onload;
+            var newonload = function(evt) {
+                curronload(evt);
+                create_ezolpl(pvID, rv);
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = create_ezolpl.bind(null, pvID, rv);
+        }
+    }
+}
+
+__ez.queue.addFunc("attach_ezolpl", "attach_ezolpl", ["8d72b58e-73ae-4fbc-7365-d90807a83f93", "false"], false, ['/detroitchicago/boise.js'], true, false, false, false);
+</script>
+<script type="text/javascript">__ez.queue.addFile('/detroitchicago/cmbv2.js', '/detroitchicago/cmbv2.js?gcb=195-0&cb=04-3y02-8y06-13y07-2y0b-6y0d-21y13-4y17-5y21-3y2f-4y5b-22&cmbcb=113&sj=x04x02x06x07x0bx0dx13x17x21x2fx5b', true, [], true, false, true, false);</script><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/cmbv2.js" async=""></script>
+<script type="text/javascript" defer="">__ez.queue.addFile('/detroitchicago/cmbdv2.js', '/detroitchicago/cmbdv2.js?gcb=195-0&cb=03-8y0c-6y18-5y5c-22&cmbcb=113&sj=x03x0cx18x5c', true, ['/detroitchicago/cmbv2.js'], true, false, true, false);</script>
+<script>
+    (function(window, document) {
+        if (typeof window.__cmp !== "undefined") {
+            window.__cmp('getVendorConsents', null, function(result) {
+				ezConsentCategories.preference = !!(result.purposeConsents[4]&1);
+				ezConsentCategories.statistics = !!(result.purposeConsents[5]&1);
+				ezConsentCategories.marketing = !!(result.purposeConsents[2]&result.purposeConsents[3]&1);
+				__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+            });
+        }
+    })(window, document);
+</script>
+
+<script>
+    (function(window, document) {
+		if (typeof window.__tcfapi !== "undefined") {
+			var amazonHasRun = false;
+			function _ezAllowed(tcdata, purpose) {
+				return tcdata.purpose.consents[purpose] || tcdata.purpose.legitimateInterests[purpose];
+			};
+			function _reloadAds() {
+				if (typeof window.ezorefgsl === "function" && typeof window.ezslots === "object") {
+					if(typeof __ezapsFetchBids == "function" && amazonHasRun === false){
+						ezapsFetchBids(__ezaps);
+						if(typeof __ezapsVideo != 'undefined') {
+							ezapsFetchBids(__ezapsVideo, 'video')
+						}
+						amazonHasRun = true;
+					}
+					var slots = [];
+					for (var i=0;i<window.ezslots.length;i++) {
+						if (window[window.ezslots[i]] && typeof window[window.ezslots[i]] === "object") {
+							slots.push(window[window.ezslots[i]])
+						}
+						else {
+							setTimeout(_reloadAds, 50);
+							return false;
+						}
+					}
+					for (var i=0;i<slots.length;i++) {
+						window.ezorefgsl(slots[i]);
+					}
+				}
+				else {
+					setTimeout(_reloadAds, 50);
+				}
+			};
+			function _clearEzConsentCookie() {
+				document.cookie = 'ezCMPCookieConsent=tcf2;Domain=.r-graph-gallery.com;Path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+			};
+			__tcfapi('addEventListener', 2, function(tcdata, success){
+				if (success) {
+					if (tcdata.eventStatus === "useractioncomplete" || tcdata.eventStatus === "tcloaded") {
+						var ezConsentCategories = window.ezConsentCategories ? window.ezConsentCategories : {};
+						ezConsentCategories.preferences = false;
+						ezConsentCategories.statistics = false;
+						ezConsentCategories.marketing = false;
+						if ((tcdata.vendor.consents["347"] !== false) || (tcdata.vendor.legitimateInterests["347"] !== false)) {
+							if (tcdata.purpose.consents["1"] === true) {
+								ezConsentCategories.preferences = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "10") && _ezAllowed(tcdata, "7") && _ezAllowed(tcdata, "8")) {
+								ezConsentCategories.statistics = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4")) {
+								ezConsentCategories.marketing = true;
+							}
+						}
+						if ((tcdata.purpose.consents["1"] === true) && (tcdata.vendor.consents["755"] !== false)) {
+							
+							_reloadAds();
+						}
+						if (window.__ezconsent) {
+							__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+						}
+						window.addEventListener("beforeunload", _clearEzConsentCookie);
+						__tcfapi("removeEventListener", 2, function(success){return null;}, tcdata.listenerId);
+						if (!((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4"))) {
+							if(typeof __ez == 'object' && typeof __ez.bit == 'object' && typeof window["_ezaq"] == 'object' && typeof window["_ezaq"]["page_view_id"] == 'string') {
+								__ez.bit.AddAndFire(window["_ezaq"]["page_view_id"], [(new __ezDotData('non_personalized_ads', true))]);
+							}
+						}
+					}
+				}
+			});
+		}
+	})(window, document);
+</script>
+<script type="text/javascript">var cmpIsOn = true;</script>
+<script defer="" type="text/javascript" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/consentsettings.js"></script><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/houston.js" async=""></script><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/cmbdv2.js" async=""></script><script async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/pp.js"></script></head>
+
+
+
+
+
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1" data-new-gr-c-s-check-loaded="14.1081.0" data-gr-ext-installed="">
+
+
+<!-- THIS ALLOWS TO INSERT THE MENU THAT IS STORED IN A MENU.HTML FILE-->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+<script>
+    (function(window, document) {
+        if (typeof window.__cmp !== "undefined") {
+            window.__cmp('getVendorConsents', null, function(result) {
+				ezConsentCategories.preference = !!(result.purposeConsents[4]&1);
+				ezConsentCategories.statistics = !!(result.purposeConsents[5]&1);
+				ezConsentCategories.marketing = !!(result.purposeConsents[2]&result.purposeConsents[3]&1);
+				__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+            });
+        }
+    })(window, document);
+</script>
+
+<script>
+    (function(window, document) {
+		if (typeof window.__tcfapi !== "undefined") {
+			var amazonHasRun = false;
+			function _ezAllowed(tcdata, purpose) {
+				return tcdata.purpose.consents[purpose] || tcdata.purpose.legitimateInterests[purpose];
+			};
+			function _reloadAds() {
+				if (typeof window.ezorefgsl === "function" && typeof window.ezslots === "object") {
+					if(typeof __ezapsFetchBids == "function" && amazonHasRun === false){
+						ezapsFetchBids(__ezaps);
+						if(typeof __ezapsVideo != 'undefined') {
+							ezapsFetchBids(__ezapsVideo, 'video')
+						}
+						amazonHasRun = true;
+					}
+					var slots = [];
+					for (var i=0;i<window.ezslots.length;i++) {
+						if (window[window.ezslots[i]] && typeof window[window.ezslots[i]] === "object") {
+							slots.push(window[window.ezslots[i]])
+						}
+						else {
+							setTimeout(_reloadAds, 50);
+							return false;
+						}
+					}
+					for (var i=0;i<slots.length;i++) {
+						window.ezorefgsl(slots[i]);
+					}
+				}
+				else {
+					setTimeout(_reloadAds, 50);
+				}
+			};
+			function _clearEzConsentCookie() {
+				document.cookie = 'ezCMPCookieConsent=tcf2;Domain=.r-graph-gallery.com;Path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+			};
+			__tcfapi('addEventListener', 2, function(tcdata, success){
+				if (success) {
+					if (tcdata.eventStatus === "useractioncomplete" || tcdata.eventStatus === "tcloaded") {
+						var ezConsentCategories = window.ezConsentCategories ? window.ezConsentCategories : {};
+						ezConsentCategories.preferences = false;
+						ezConsentCategories.statistics = false;
+						ezConsentCategories.marketing = false;
+						if ((tcdata.vendor.consents["347"] !== false) || (tcdata.vendor.legitimateInterests["347"] !== false)) {
+							if (tcdata.purpose.consents["1"] === true) {
+								ezConsentCategories.preferences = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "10") && _ezAllowed(tcdata, "7") && _ezAllowed(tcdata, "8")) {
+								ezConsentCategories.statistics = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4")) {
+								ezConsentCategories.marketing = true;
+							}
+						}
+						if ((tcdata.purpose.consents["1"] === true) && (tcdata.vendor.consents["755"] !== false)) {
+							
+							_reloadAds();
+						}
+						if (window.__ezconsent) {
+							__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+						}
+						window.addEventListener("beforeunload", _clearEzConsentCookie);
+						__tcfapi("removeEventListener", 2, function(success){return null;}, tcdata.listenerId);
+						if (!((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4"))) {
+							if(typeof __ez == 'object' && typeof __ez.bit == 'object' && typeof window["_ezaq"] == 'object' && typeof window["_ezaq"]["page_view_id"] == 'string') {
+								__ez.bit.AddAndFire(window["_ezaq"]["page_view_id"], [(new __ezDotData('non_personalized_ads', true))]);
+							}
+						}
+					}
+				}
+			});
+		}
+	})(window, document);
+</script>
+<script type="text/javascript">var cmpIsOn = true;</script>
+<script defer="" type="text/javascript" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/consentsettings.js"></script><div class="container">
+  <a href="https://r-graph-gallery.com/index.html">← the R Graph Gallery</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    Menu
+    <i class="fa fa-bars"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav text-uppercase ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#researchModal"><i class="fa fa-search"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#LogoMenu">Chart types</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Quick
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <p class="menuTitle"><i>ggplot2</i></p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/238-custom-layout-axis-ggplot2.html">Axis</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/ggplot2-color.html">Color</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/ggplot2-package.html#themes">Themes</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/239-custom-layout-legend-ggplot2.html">Legend</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/ggplot2-package.html#annotation">Annotation</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/ggplot2-package.html#faceting">Faceting</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/240-custom-layout-background-ggplot2.html">Background</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html">Re-ordering</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/custom-fonts-in-R-and-ggplot2.html">Fonts</a>
+
+          <p class="menuTitle"><i>Base R</i></p>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/base-R.html#parameters">Shape parameters</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/base-R.html#margin">Margin</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/colors.html">Color</a>
+
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://r-graph-gallery.com/base-R.html">base R</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/ggplot2-package.html">ggplot2</a>
+          <a class="dropdown-item" href="https://r-graph-gallery.com/interactive-charts.html">interactive charts</a>
+          <a class="dropdown-item" href="https://holtzy.github.io/Pimp-my-rmd/" target="_blank">R Markdown</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="https://r-graph-gallery.com/all-graphs.html">All</a>
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Related
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://www.data-to-viz.com/">Data to viz</a>
+          <a class="dropdown-item" href="https://www.dataviz-inspiration.com/">Dataviz inspiration</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://www.python-graph-gallery.com/">Python graph gallery</a>
+          <a class="dropdown-item" href="https://www.d3-graph-gallery.com/">D3.js graph gallery</a>
+          <a class="dropdown-item" href="https://www.react-graph-gallery.com/">React graph gallery</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="https://r-graph-gallery.com/about.html">About</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript" async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ezcl.webp"></script></nav>
+<script>
+  $(function(){
+    $("#mainNav").load("html_chunk/menu.html");
+  });
+</script>
+
+<!-- THIS ALLOWS TO INSERT THE MODAL OF THE MENU THAT IS STORED IN A MENU_MODAL.HTML FILE-->
+<div id="modal_menu_insertion"><!-- This document provide the code for 2 modals related to the menu: i/ the modal showing all chart types ii/ the search bar utility --><!-- Modal menu: one icon per chart type with black background -->
+<script>
+    (function(window, document) {
+        if (typeof window.__cmp !== "undefined") {
+            window.__cmp('getVendorConsents', null, function(result) {
+				ezConsentCategories.preference = !!(result.purposeConsents[4]&1);
+				ezConsentCategories.statistics = !!(result.purposeConsents[5]&1);
+				ezConsentCategories.marketing = !!(result.purposeConsents[2]&result.purposeConsents[3]&1);
+				__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+            });
+        }
+    })(window, document);
+</script>
+
+<script>
+    (function(window, document) {
+		if (typeof window.__tcfapi !== "undefined") {
+			var amazonHasRun = false;
+			function _ezAllowed(tcdata, purpose) {
+				return tcdata.purpose.consents[purpose] || tcdata.purpose.legitimateInterests[purpose];
+			};
+			function _reloadAds() {
+				if (typeof window.ezorefgsl === "function" && typeof window.ezslots === "object") {
+					if(typeof __ezapsFetchBids == "function" && amazonHasRun === false){
+						ezapsFetchBids(__ezaps);
+						if(typeof __ezapsVideo != 'undefined') {
+							ezapsFetchBids(__ezapsVideo, 'video')
+						}
+						amazonHasRun = true;
+					}
+					var slots = [];
+					for (var i=0;i<window.ezslots.length;i++) {
+						if (window[window.ezslots[i]] && typeof window[window.ezslots[i]] === "object") {
+							slots.push(window[window.ezslots[i]])
+						}
+						else {
+							setTimeout(_reloadAds, 50);
+							return false;
+						}
+					}
+					for (var i=0;i<slots.length;i++) {
+						window.ezorefgsl(slots[i]);
+					}
+				}
+				else {
+					setTimeout(_reloadAds, 50);
+				}
+			};
+			function _clearEzConsentCookie() {
+				document.cookie = 'ezCMPCookieConsent=tcf2;Domain=.r-graph-gallery.com;Path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+			};
+			__tcfapi('addEventListener', 2, function(tcdata, success){
+				if (success) {
+					if (tcdata.eventStatus === "useractioncomplete" || tcdata.eventStatus === "tcloaded") {
+						var ezConsentCategories = window.ezConsentCategories ? window.ezConsentCategories : {};
+						ezConsentCategories.preferences = false;
+						ezConsentCategories.statistics = false;
+						ezConsentCategories.marketing = false;
+						if ((tcdata.vendor.consents["347"] !== false) || (tcdata.vendor.legitimateInterests["347"] !== false)) {
+							if (tcdata.purpose.consents["1"] === true) {
+								ezConsentCategories.preferences = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "10") && _ezAllowed(tcdata, "7") && _ezAllowed(tcdata, "8")) {
+								ezConsentCategories.statistics = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4")) {
+								ezConsentCategories.marketing = true;
+							}
+						}
+						if ((tcdata.purpose.consents["1"] === true) && (tcdata.vendor.consents["755"] !== false)) {
+							
+							_reloadAds();
+						}
+						if (window.__ezconsent) {
+							__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+						}
+						window.addEventListener("beforeunload", _clearEzConsentCookie);
+						__tcfapi("removeEventListener", 2, function(success){return null;}, tcdata.listenerId);
+						if (!((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4"))) {
+							if(typeof __ez == 'object' && typeof __ez.bit == 'object' && typeof window["_ezaq"] == 'object' && typeof window["_ezaq"]["page_view_id"] == 'string') {
+								__ez.bit.AddAndFire(window["_ezaq"]["page_view_id"], [(new __ezDotData('non_personalized_ads', true))]);
+							}
+						}
+					}
+				}
+			});
+		}
+	})(window, document);
+</script>
+<script type="text/javascript">var cmpIsOn = true;</script>
+<script defer="" type="text/javascript" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/consentsettings.js"></script><div class="portfolio-modal modal fade" id="LogoMenu" tabindex="-1" role="dialog" aria-hidden="true" style="background-color: black;">
+  <div class="modal-dialog h-100 modal-dialog-centered" style="width: 80%; max-width: 917px">
+    <div class="modal-content">
+      <div class="close-modal" data-dismiss="modal" style="background-color: black;">
+        <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html"><p style="color: white; text-align: right; font-size: 23px">✕</p></a>
+      </div>
+      <div class="container" style="background-color: black;">
+        <div class="row">
+            <div class="modal-body">
+
+               <a href="https://r-graph-gallery.com/violin.html">
+                 <img class="img-fluid imageOfMenu imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Violin150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/density-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Density150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/histogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Histogram150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/boxplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Box1150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/ridgeline-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Joyplot150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/scatterplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ScatterPlot150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/heatmap">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Heatmap150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/correlogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Correlogram150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/bubble-chart.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/BubblePlot150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/connected-scatterplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ScatterConnected150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/2d-density-chart.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/2dDensity150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/barplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Bar150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/spider-or-radar-chart.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Spider150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/wordcloud.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Wordcloud150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/parallel-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Parallel1150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/lollipop-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Lollipop150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/circular-barplot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/CircularBarplot150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/treemap.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Tree150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/doughnut-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Doughnut150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/pie-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Pie150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/dendrogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Dendrogram150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/circle-packing.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/CircularPacking150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/line-plot.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Line150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/area-chart.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Area150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/stacked-area-graph.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/StackedArea150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/streamgraph.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Stream150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/map.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Map150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/choropleth-map.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Choropleth150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/hexbin-map.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/MapHexbin150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/cartogram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Cartogram150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/connection-map.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ConnectedMap150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/bubble-map.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/BubbleMap150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/chord-diagram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Chord150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/network.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Network150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/sankey-diagram.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Sankey150.png" alt="">
+               </a><a href="https://www.data-to-viz.com/graph/arc.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Arc150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/hierarchical-edge-bundling.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Bundle150.png" alt="">
+               </a>
+
+               <a href="https://r-graph-gallery.com/animation.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/anim150.gif" alt="">
+               </a><a href="https://r-graph-gallery.com/interactive-charts.html">
+                  <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Interactive150.png" alt="">
+               </a><a href="https://r-graph-gallery.com/3d.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/3d150.png" alt="">
+               </a><a href="https://www.data-to-viz.com/caveats.html">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Bad150.png" alt="" target="_blank">
+               </a><a href="https://www.data-to-art.com/">
+                 <img class="img-fluid imageOfMenu" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/DataArt1150.png" alt="" target="_blank">
+               </a>
+
+              <span>X</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Research Bar Modal -->
+<div class="modal fade" id="researchModal" tabindex="-1" role="dialog" aria-hidden="true" style="margin-right: 20px; margin-left: 20px">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px">
+    <div class="modal-content" style="min-height: 400px">
+      <div class="close-modal" data-dismiss="modal">
+        <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html"><p style="color: #b8b8b8; padding-right: 15px; padding-top: 5px; text-align: right; font-size: 23px">✕</p></a>
+      </div>
+      <div class="container">
+        <div class="row">
+            <div class="modal-body">
+              <!-- Project Details Go Here -->
+               <div style="margin-top: 120px; margin-bottom: 120px">
+                  <center>
+                    <input id="stringToSearch" type="text" name="usrname" value="geom_bar" style="  outline: 0; border-width: 0 0 2px; border-color: #b35900 !important;">
+                    <button id="researchSubmitButton" class="btn btn-secondary btn-md text-uppercase" type="button">Submit</button>
+                  </center>
+                </div>
+               <div id="resultSearch"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/d3.v4.js"></script>
+<script>
+// A function that returns a list of interesting pages for the query
+function returnPages() {
+
+  // get the text that must been searched
+  var toSearch = d3.select("#stringToSearch").property("value")
+  var address = "https://api.github.com/search/code?q=%22" + toSearch + "%22+repo:holtzy/R-graph-gallery+extension:html"
+
+  // Do the request to the gthub API
+  d3.request(address)
+    .mimeType("application/vnd.github.v3.text-match+json")
+    .response(function(xhr) {
+      var data = JSON.parse(xhr.responseText);
+
+      // Div where I add the code
+      div = d3.select("#resultSearch")
+
+      // Erase the content of the div
+      div.html("")
+
+      // If no result, display a no result message
+      if(data.items.length==0){
+        div.html("<center><p>😔<i>No result found, sorry...</i>😔</p></center>")
+      }
+
+      // For each result item, add a section
+      div
+        .selectAll("resultItems")
+        .data(data.items)
+        .enter()
+          .append("div")
+          .html(function(d){
+            // Url to redirect to
+            url = "https://www.r-graph-gallery.com/" + d.name
+
+            // Code selection: if 2 entries, keep only the second one.
+            initialCode = d.text_matches[d.text_matches.length - 1].fragment
+            cleanCode = initialCode
+              .replace("\n", "<br>")
+              .replace("<li>", "")
+              .replace(toSearch, "<span style='background-color: yellow'>"+toSearch+'</span>')
+            codeReady = "<p class='codeResearch'>....." + cleanCode + ".....</p>"
+            return ("<br><br><a href=" + url + ">&rarr; " + d.name + "</a>" + "<br>" + codeReady)
+          })
+    }).get()
+
+  }
+
+// When the submit button is triggered, run the function
+d3.select("#researchSubmitButton").on("click", returnPages);
+
+// If the 'Enter' key is pressed, trigger the function as well
+var input = document.getElementById("stringToSearch");
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    document.getElementById("researchSubmitButton").click();
+  }
+});
+
+</script>
+<script type="text/javascript" async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ezcl.webp"></script></div>
+<script>
+  $(function(){
+    $("#modal_menu_insertion").load("html_chunk/menu_modal.html");
+  });
+</script>
+
+
+
+<!-- Header = Title in big + social media Icon + quick description -->
+<header class="masthead" style="padding-bottom: 30px;">
+  <div class="textlanding">
+      <center><h1>Multi groups line chart with ggplot2<span id="ezoic-pub-ad-placeholder-128" class="ezoic-adpicker-ad"></span></h1></center>
+      <hr class="short_hr">
+      <br>
+      <ul class="list-inline social-buttons">
+        <li class="list-inline-item">
+          <a href="https://twitter.com/R_Graph_Gallery">
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item social-buttons">
+          <a href="https://github.com/holtzy">
+            <i class="fa fa-github" style="color: white"></i>
+          </a>
+        </li>
+        <li class="list-inline-item social-buttons">
+          <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </li>
+        <li class="list-inline-item social-buttons">
+          <a href="https://www.yan-holtz.com/">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+      </ul>
+      <center><p style="max-width: 600px; margin-top: 40px">This post explains how to build a <a href="https://r-graph-gallery.com/line-plot.html">line chart</a> that represents several groups with <a href="https://r-graph-gallery.com/ggplot2-package.html">ggplot2</a>. It provides several examples with explanation and reproducible code.</p></center>
+      <div style="text-align:center">
+         <a class="btn btn-secondary btn-xl text-uppercase js-scroll-trigger" href="https://r-graph-gallery.com/line-plot.html">Line chart Section</a>
+         <a class="btn btn-secondary btn-xl text-uppercase js-scroll-trigger" href="https://www.data-to-viz.com/graph/line.html">About line chart</a>
+      </div>
+  </div>
+<span id="ezoic-pub-ad-placeholder-102" class="ezoic-adpicker-ad"></span><span class="ezoic-ad ezoic-at-0 box-2 box-2102 adtester-container adtester-container-102" data-ez-name="r_graph_gallery_com-box-2"><span id="div-gpt-ad-r_graph_gallery_com-box-2-0" ezaw="970" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:970px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof ez_ad_units != 'undefined'){ez_ad_units.push([[970,250],'r_graph_gallery_com-box-2','ezslot_1',102,'0','0'])};__ez_fad_position('div-gpt-ad-r_graph_gallery_com-box-2-0');</script></span></span></header>
+
+
+
+<!-- THIS ALLOWS TO INSERT THE ADVERTISEMENT BANNER THAT IS STORED IN A BANNER.HTML FILE-->
+<div id="position_for_images"><!-- <section class="bg-light" style="padding-top: 10px; padding-bottom: 10px; margin-bottom: 50px;">
+  <div class="container" class="bg-light">
+    <div class="row justify-content-center">
+
+      <a href="https://datacamp.pxf.io/za2ZAO"
+        onclick="getOutboundLink('https://datacamp.pxf.io/za2ZAO'); return false;">
+        <img class="imgBanner" height="230" src="img/banner/datacamp_banner_new.png" alt="Datacamp for dataviz banner"
+          style="padding: 8px;"></img>
+      </a>
+
+      <a href="https://www.jumpingrivers.com/?utm_source=rgraph&utm_campaign=1&utm_medium=banner"
+        onclick="getOutboundLink('https://www.jumpingrivers.com/?utm_source=rgraph&utm_campaign=1&utm_medium=banner'); return false;">
+        <img class="imgBanner" height="230" src="img/banner/JumpingRiver_banner.jpg" alt="Jumping River Logo"
+          title="JumpingRiver" style="padding: 8px;"></img>
+      </a>
+
+      <a href="https://www.highstat.com/" onclick="getOutboundLink('https://www.highstat.com/'); return false;">
+        <img class="imgBanner" height="230" src="img/banner/HighStat_banner.jpg" alt="Highstat Logo" title="HighStat"
+          style="padding: 8px;"></img>
+      </a>
+
+      <a href="https://amzn.to/3lfKf7Q">
+        <img class="imgBanner" height="230" src="img/banner/r-for-data-science.jpg" alt="R for data science book" title="R-for-data-science"
+          style="padding: 8px;"></img>
+      </a>
+
+      <a href="https://appsilon.com/careers/job-offer/?job=senior-r-shiny-developer">
+        <img class="imgBanner" height="230" src="img/banner/appsilon_small.png" alt="appsilon is looking for R shiny developers" title="appsilon-shiny-dev"
+          style="padding: 8px;"></img>
+      </a>
+
+    </div>
+  </div>
+</section> -->
+<script>
+    (function(window, document) {
+        if (typeof window.__cmp !== "undefined") {
+            window.__cmp('getVendorConsents', null, function(result) {
+				ezConsentCategories.preference = !!(result.purposeConsents[4]&1);
+				ezConsentCategories.statistics = !!(result.purposeConsents[5]&1);
+				ezConsentCategories.marketing = !!(result.purposeConsents[2]&result.purposeConsents[3]&1);
+				__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+            });
+        }
+    })(window, document);
+</script>
+
+<script>
+    (function(window, document) {
+		if (typeof window.__tcfapi !== "undefined") {
+			var amazonHasRun = false;
+			function _ezAllowed(tcdata, purpose) {
+				return tcdata.purpose.consents[purpose] || tcdata.purpose.legitimateInterests[purpose];
+			};
+			function _reloadAds() {
+				if (typeof window.ezorefgsl === "function" && typeof window.ezslots === "object") {
+					if(typeof __ezapsFetchBids == "function" && amazonHasRun === false){
+						ezapsFetchBids(__ezaps);
+						if(typeof __ezapsVideo != 'undefined') {
+							ezapsFetchBids(__ezapsVideo, 'video')
+						}
+						amazonHasRun = true;
+					}
+					var slots = [];
+					for (var i=0;i<window.ezslots.length;i++) {
+						if (window[window.ezslots[i]] && typeof window[window.ezslots[i]] === "object") {
+							slots.push(window[window.ezslots[i]])
+						}
+						else {
+							setTimeout(_reloadAds, 50);
+							return false;
+						}
+					}
+					for (var i=0;i<slots.length;i++) {
+						window.ezorefgsl(slots[i]);
+					}
+				}
+				else {
+					setTimeout(_reloadAds, 50);
+				}
+			};
+			function _clearEzConsentCookie() {
+				document.cookie = 'ezCMPCookieConsent=tcf2;Domain=.r-graph-gallery.com;Path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+			};
+			__tcfapi('addEventListener', 2, function(tcdata, success){
+				if (success) {
+					if (tcdata.eventStatus === "useractioncomplete" || tcdata.eventStatus === "tcloaded") {
+						var ezConsentCategories = window.ezConsentCategories ? window.ezConsentCategories : {};
+						ezConsentCategories.preferences = false;
+						ezConsentCategories.statistics = false;
+						ezConsentCategories.marketing = false;
+						if ((tcdata.vendor.consents["347"] !== false) || (tcdata.vendor.legitimateInterests["347"] !== false)) {
+							if (tcdata.purpose.consents["1"] === true) {
+								ezConsentCategories.preferences = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "10") && _ezAllowed(tcdata, "7") && _ezAllowed(tcdata, "8")) {
+								ezConsentCategories.statistics = true;
+							}
+							if ((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4")) {
+								ezConsentCategories.marketing = true;
+							}
+						}
+						if ((tcdata.purpose.consents["1"] === true) && (tcdata.vendor.consents["755"] !== false)) {
+							
+							_reloadAds();
+						}
+						if (window.__ezconsent) {
+							__ezconsent.setEzoicConsentSettings(ezConsentCategories);
+						}
+						window.addEventListener("beforeunload", _clearEzConsentCookie);
+						__tcfapi("removeEventListener", 2, function(success){return null;}, tcdata.listenerId);
+						if (!((tcdata.purpose.consents["1"] === true) && _ezAllowed(tcdata, "2") && _ezAllowed(tcdata, "3") && _ezAllowed(tcdata, "4"))) {
+							if(typeof __ez == 'object' && typeof __ez.bit == 'object' && typeof window["_ezaq"] == 'object' && typeof window["_ezaq"]["page_view_id"] == 'string') {
+								__ez.bit.AddAndFire(window["_ezaq"]["page_view_id"], [(new __ezDotData('non_personalized_ads', true))]);
+							}
+						}
+					}
+				}
+			});
+		}
+	})(window, document);
+</script>
+<script type="text/javascript">var cmpIsOn = true;</script>
+<script defer="" type="text/javascript" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/consentsettings.js"></script><script type="text/javascript" async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ezcl.webp"></script></div>
+<script>
+  $(function(){
+    $("#position_for_images").load("html_chunk/images.html");
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- STYLE for chart pages but not the rest of tthe website -->
+<style>
+  img {
+    margin-top: 20px;
+  }
+</style>
+
+
+
+<div class="container">
+<h1 id="basic-version">Basic version</h1>
+<hr>
+<div class="row">
+<div class="col-md-6 col-sm-12 align-self-center">
+<p>If you’re not familiar with the <code>geom_line()</code> function, you should probably have a look to the <a href="https://r-graph-gallery.com/line-chart-ggplot2.html">most basic line chart</a> first.</p>
+<p>Here, the input data frame is composed by 3 columns:</p>
+<ul>
+<li>An <em>ordered</em> numeric variable for the X axis</li>
+<li>Another numeric variable for the Y axis</li>
+<li>A categorical variable that specify the group of the observation</li>
+</ul>
+<p>The idea is to draw one line per group. This is doable by specifying a different color to each group with the <code>color</code> argument of <code>ggplot2</code>.</p>
+</div>
+<div class="col-md-6 col-sm-12">
+<p><img src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/thecode-1.png" width="100%"></p>
+</div>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Libraries</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(babynames) <span class="co"># provide the dataset: a dataframe called babynames</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># Keep only 3 names</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">don &lt;-<span class="st"> </span>babynames <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Ashley"</span>, <span class="st">"Patricia"</span>, <span class="st">"Helen"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">  </span><span class="kw">filter</span>(sex<span class="op">==</span><span class="st">"F"</span>)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  </a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">don <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="st">  </span><span class="kw">ggplot</span>( <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n, <span class="dt">group=</span>name, <span class="dt">color=</span>name)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="st">    </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<h1 id="customize-the-grouped-line-chart">Customize the grouped line chart</h1>
+<hr>
+<div class="row">
+<div class="col-md-6 col-sm-12 align-self-center">
+<p>Several options are available to customize the line chart appearance:</p>
+<ul>
+<li>Add a title with <code>ggtitle()</code>.</li>
+<li>Change line style with arguments like <code>shape</code>, <code>size</code>, <code>color</code> and more.</li>
+<li>Use the <code>viridis</code> package to get a nice color palette.</li>
+<li>Custom the general theme with the <code>theme_ipsum()</code> function of the <code>hrbrthemes</code> package.</li>
+</ul>
+<p>More generally, visit the [ggplot2 section] for more ggplot2 related stuff.</p>
+</div>
+<div class="col-md-6 col-sm-12">
+<p><img src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/thecode2-1.png" width="100%"></p>
+</div>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Libraries</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(babynames) <span class="co"># provide the dataset: a dataframe called babynames</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">library</span>(hrbrthemes)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">library</span>(viridis)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># Keep only 3 names</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">don &lt;-<span class="st"> </span>babynames <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Ashley"</span>, <span class="st">"Patricia"</span>, <span class="st">"Helen"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">  </span><span class="kw">filter</span>(sex<span class="op">==</span><span class="st">"F"</span>)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">  </a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">don <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw">ggplot</span>( <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n, <span class="dt">group=</span>name, <span class="dt">color=</span>name)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="st">    </span><span class="kw">scale_color_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Popularity of American names in the previous 30 years"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="st">    </span><span class="kw">theme_ipsum</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">    </span><span class="kw">ylab</span>(<span class="st">"Number of babies born"</span>)</a></code></pre></div>
+<h1 id="notes">Notes</h1>
+<hr>
+<ul>
+<li>Read more about line charts theory <a href="https://www.data-to-viz.com/graph/line.html">here</a></li>
+<li>Be careful: a line chart with too many groups results in a <a href="https://www.data-to-viz.com/caveat/spaghetti.html">spaghetti chart</a>, which is a <a href="https://www.data-to-viz.com/caveats.html">bad practice</a>.</li>
+<li>Visit <a href="https://www.data-to-viz.com/">data-to-viz</a> for line chart alternatives.</li>
+</ul>
+<!-- Close container -->
+</div>
+<!-- ============================ RELATED SECTION ============================ -->
+<section class="bg-light" id="portfolio_landing" style="padding-top: 30px; padding-bottom: 30px; margin-top: 100px;">
+
+<div class="container">
+
+  <p class="mySeryTitle">Related chart types</p>
+  <hr>
+  <div class="row">
+    <div class="col-md-2 col-sm-4 portfolio-item ">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/scatterplot.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ScatterPlot150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Scatter</div>
+    </div>
+    <div class="col-md-2 col-sm-4 portfolio-item">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/heatmap.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Heatmap150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Heatmap</div>
+    </div>
+    <div class="col-md-2 col-sm-4 portfolio-item">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/correlogram.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/Correlogram150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Correlogram</div>
+    </div>
+    <div class="col-md-2 col-sm-4 portfolio-item">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/bubble-chart.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/BubblePlot150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Bubble</div>
+    </div>
+    <div class="col-md-2 col-sm-4 portfolio-item ">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/connected-scatterplot.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ScatterConnected150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Connected scatter</div>
+    </div>
+    <div class="col-md-2 col-sm-4 portfolio-item show column correlation numonly bigdata">
+      <a class="portfolio-link" href="https://r-graph-gallery.com/2d-density-chart.html">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <img class="img-fluid" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/2dDensity150.png" alt="">
+      </a>
+      <div class="captionPortfolio">Density 2d</div>
+    </div>
+  </div>
+
+</div>
+</section><span id="ezoic-pub-ad-placeholder-111" class="ezoic-adpicker-ad"></span><span class="ezoic-ad ezoic-at-0 medrectangle-1 medrectangle-1111 adtester-container adtester-container-111 ezoic-ad-adaptive" data-ez-name="r_graph_gallery_com-medrectangle-1"><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-111 adtester-container adtester-container-111" data-ez-name="r_graph_gallery_com-medrectangle-1"><span id="div-gpt-ad-r_graph_gallery_com-medrectangle-1-0" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof ez_ad_units != 'undefined'){ez_ad_units.push([[300,250],'r_graph_gallery_com-medrectangle-1','ezslot_2',111,'0','0'])};__ez_fad_position('div-gpt-ad-r_graph_gallery_com-medrectangle-1-0');</script></span></span><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-111 adtester-container adtester-container-111" data-ez-name="r_graph_gallery_com-medrectangle-1"><span id="div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof ez_ad_units != 'undefined'){ez_ad_units.push([[300,250],'r_graph_gallery_com-medrectangle-1','ezslot_3',111,'0','1'])};__ez_fad_position('div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1');</script></span></span><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-111 adtester-container adtester-container-111" data-ez-name="r_graph_gallery_com-medrectangle-1"><span id="div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof ez_ad_units != 'undefined'){ez_ad_units.push([[300,250],'r_graph_gallery_com-medrectangle-1','ezslot_4',111,'0','2'])};__ez_fad_position('div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2');</script></span></span><style> .medrectangle-1-multi-111{border:none !important;display:block !important;float:none !important;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;max-width:100% !important;min-height:250px;min-width:300px;padding:0;text-align:center !important;}</style></span>
+
+
+
+
+
+
+<!-- ============================ CONTACT SECTION ============================ -->
+<section id="contact" class="bg" style="background-color: white; padding-top: 60px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 text-center"></div>
+      <div class="col-lg-8 text-center">
+        <br><br><br>
+        <h2 class="section-heading text-uppercase" style="color: black">Contact</h2>
+        <p>This document is a work by <a href="https://www.yan-holtz.com/">Yan Holtz</a>. Any feedback is highly encouraged. You can fill an issue on <a href="https://github.com/holtzy/D3-graph-gallery/issues">Github</a>, drop me a message on <a href="https://twitter.com/R_Graph_Gallery">Twitter</a>, or send an email pasting <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html">yan.holtz.data</a> with <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html">gmail.com</a>.</p>
+        <div style="text-align:center">
+           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://github.com/holtzy">Github</a>
+           <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://twitter.com/R_Graph_Gallery">Twitter</a>
+         </div>
+      </div>
+    </div>
+  </div>
+<span id="ezoic-pub-ad-placeholder-105" class="ezoic-adpicker-ad"></span></section>
+
+
+
+<!-- ============================ FOOTER SECTION ============================ -->
+<footer class="bg-light" id="myFooter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="copyright">Copyright © the R graph gallery 2018</span>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-inline social-buttons">
+          <li class="list-inline-item">
+            <a href="https://twitter.com/R_Graph_Gallery">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://github.com/holtzy">
+              <i class="fa fa-github"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/yan-holtz-2477534a/">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <ul class="list-inline quicklinks">
+          <li class="list-inline-item">
+            <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#">Privacy Policy</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://r-graph-gallery.com/line-chart-several-groups-ggplot2.html#">Terms of Use</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+
+<!-- ============================ JAVASCRIPT SECTION ============================ -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/agency.min.js"></script>
+
+
+
+<div class="ezmob-footer ezoic-floating-bottom ezo_ad ezmob-footer-desktop" id="ezmobfooter"><center><span id="ezoic-pub-ad-placeholder-100"></span><div class="ezmob-footer ezoic-floating-bottom ezo_ad ezmob-footer-desktop" id="ezmobfooter"><center><span class="ezoic-ad ezoic-at-4 medrectangle-2 medrectangle-2100 adtester-container adtester-container-100" data-ez-name="r_graph_gallery_com-medrectangle-2"><span id="div-gpt-ad-r_graph_gallery_com-medrectangle-2-0" ezaw="728" ezah="90" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:90px;min-width:728px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof ez_ad_units != 'undefined'){ez_ad_units.push([[728,90],'r_graph_gallery_com-medrectangle-2','ezslot_0',100,'0','0'])};__ez_fad_position('div-gpt-ad-r_graph_gallery_com-medrectangle-2-0');</script></span></span></center><span class="ezmob-footer-close" onclick="__ez_close_anchor()">x</span></div></center></div><script type="text/javascript">
+				var __inScopeForCCPA = false;
+		function __uspapi(command, version, callback) {
+			var response = null;
+			var successs = false;
+			if (command === "getUSPData" && version === 1) {
+				var uspString = "1"; // Version
+				if (__inScopeForCCPA) {
+					uspString += "N"; // Has Explicit Notice for Opt Out been provided (ex footer or minor consent modal)
+					var result;
+					var consentCookie = (result = new RegExp('(?:^|; )ezoccpaconsent=([^;]*)').exec(document.cookie)) ? (result[1]) : null;
+					if (consentCookie === "nonconsent") {
+						uspString += "Y";
+					}
+					else {
+						uspString += "N";
+					}
+					uspString += "N" // Is pub a signatory to the IAB Limited Service Provider Agreement (http://www.iabprivacy.com/)
+				}
+				else {
+					uspString += "---";
+				}
+				response = {
+					uspString: uspString,
+					version: 1
+				};
+				success = true;
+			}
+			return callback(response, success);
+		};
+		function __receiveUspapiMessage(event) {
+			if (event.data.hasOwnProperty('__uspapiCall')) {
+				__uspapi('getUSPData', 1, function(uspData, success) {
+					event.source.postMessage({
+						__uspapiReturn: {
+							returnValue: uspData,
+							success: success,
+							callId: event.data.__uspapiCall.callId
+						}
+					},
+					event.origin);
+				});
+			}
+			return null;
+		};
+		window.addEventListener("message", __receiveUspapiMessage, false);
+</script>
+<script>function __ez_fad_ezpbinit(){var s = document.createElement( 'script' );
+	s.setAttribute( 'src', '//go.ezodn.com/hb/dall.js?b=amx,ix,medianet,nobid,oftmedia,onetag,pubmatic,rubicon,sovrn&cb=195-0-49' );
+	s.onerror = function () {window.ezDallErr = true};
+	document.body.appendChild( s );}var ezOneTag={bidder:'onetag',params:{pubId:'62499636face9dc'}};var ezMedianet={bidder:'medianet',params:{"cid":"8CUBCB617","crid":"188911743"}};var ezAMX={bidder:'amx',params:{tagId:'ZXpvaWMuY29t'}};var ezjsps=function(obj){return JSON.parse(JSON.stringify(obj));};var epbjs=epbjs||{};epbjs.que=epbjs.que||[];epbjs.bidderTimeout=2000;epbjs.useAdj=true;epbjs.SS={"amx":11290,"ix":10082,"medianet":11307,"nobid":11319,"oftmedia":10081,"onetag":11291,"pubmatic":10061,"rubicon":10063,"sovrn":10017};epbjs.bidders=['amx,ix,medianet,nobid,oftmedia,onetag,pubmatic,rubicon,sovrn'];epbjs.que.push(function(){epbjs.aliasBidder('appnexus', 'oftmedia');});epbjs.bidderSettings={'oftmedia': { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.850000; var adj2 = adj1 * 1.000000; return adj2; }},};epbjs.gadj=1.000000;var __enableAnalytics=false;
+var __s2sbidders=['amx','nobid'];
+var __s2sinstreambidders=['ix','medianet','rubicon','pubmatic','vidoomy','viewdeosDX'];
+var __allBidders=['sovrn','oftmedia','ix','pubmatic','onetag','rubicon','medianet','amx','nobid'];
+__ez.queue.addFile('/detroitchicago/houston.js', '/detroitchicago/houston.js?gcb=0&cb=29', false, [], true, false, true, false);__ez.queue.addFunc("epbjsRequestAdUnits", "epbjsRequestAdUnits", [[{code: 'div-gpt-ad-r_graph_gallery_com-medrectangle-2-0', mediaTypes: {banner: { sizes:[[728,90]] }}, bids: [{bidder: 'sovrn', params: { tagid: '996065'}},{bidder: 'ix', params: { siteId: '305141', size: [728,90], video: {} }},{bidder: 'pubmatic', params:{ publisherId: '156983', adSlot: 'e_bottom_floating_728x90' }},ezjsps(ezOneTag),{bidder: 'rubicon', params:{ accountId: '21150', siteId: '351284', zoneId: '1868548' }},ezjsps(ezMedianet),ezjsps(ezAMX)] },{code: 'div-gpt-ad-r_graph_gallery_com-box-2-0', mediaTypes: {banner: { sizes:[[970,250]] }}, bids: [{bidder: 'sovrn', params: { tagid: '593595'}},{bidder: 'oftmedia', params:{ placementId: '19594005', video: {skippable: true, playback_method: ['auto_play_sound_off']}}},{bidder: 'ix', params: { siteId: '305137', size: [970,250], video: {} }},{bidder: 'pubmatic', params:{ publisherId: '156983', adSlot: 'e_top_of_page_970x250' }},ezjsps(ezOneTag),{bidder: 'rubicon', params:{ accountId: '21150', siteId: '351284', zoneId: '1868548' }},ezjsps(ezMedianet),ezjsps(ezAMX)] },{code: 'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0', mediaTypes: {banner: { sizes:[[300,250]] }}, bids: [{bidder: 'sovrn', params: { tagid: '593623'}},{bidder: 'oftmedia', params:{ placementId: '19594037', video: {skippable: true, playback_method: ['auto_play_sound_off']}}},{bidder: 'ix', params: { siteId: '305140', size: [300,250], video: {} }},{bidder: 'pubmatic', params:{ publisherId: '156983', adSlot: 'e_bottom_of_page_300x250' }},ezjsps(ezOneTag),{bidder: 'rubicon', params:{ accountId: '21150', siteId: '351284', zoneId: '1868548' }},ezjsps(ezMedianet),ezjsps(ezAMX)] ,sizeMapping: [
+			{
+				minWidth: 300,
+				sizes: [[300,250]]
+			}]},{code: 'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_1', mediaTypes: {banner: { sizes:[[300,250]] }}, bids: [{bidder: 'sovrn', params: { tagid: '593623'}},{bidder: 'oftmedia', params:{ placementId: '19594037', video: {skippable: true, playback_method: ['auto_play_sound_off']}}},{bidder: 'ix', params: { siteId: '305140', size: [300,250], video: {} }},{bidder: 'pubmatic', params:{ publisherId: '156983', adSlot: 'e_bottom_of_page_300x250' }},ezjsps(ezOneTag),{bidder: 'rubicon', params:{ accountId: '21150', siteId: '351284', zoneId: '1868548' }},ezjsps(ezMedianet),ezjsps(ezAMX)] ,sizeMapping: [
+			{
+				minWidth: 300,
+				sizes: [[300,250]]
+			}]},{code: 'div-gpt-ad-r_graph_gallery_com-medrectangle-1-0_2', mediaTypes: {banner: { sizes:[[300,250]] }}, bids: [{bidder: 'sovrn', params: { tagid: '593623'}},{bidder: 'oftmedia', params:{ placementId: '19594037', video: {skippable: true, playback_method: ['auto_play_sound_off']}}},{bidder: 'ix', params: { siteId: '305140', size: [300,250], video: {} }},{bidder: 'pubmatic', params:{ publisherId: '156983', adSlot: 'e_bottom_of_page_300x250' }},ezjsps(ezOneTag),{bidder: 'rubicon', params:{ accountId: '21150', siteId: '351284', zoneId: '1868548' }},ezjsps(ezMedianet),ezjsps(ezAMX)] ,sizeMapping: [
+			{
+				minWidth: 300,
+				sizes: [[300,250]]
+			}]}]], false, ['/detroitchicago/houston.js'], true, true, true, true);var __pd = 'MTA9NDU4YTk1ZmUxNjY4ODBjM2RhMDYzM2EyMDdjNjZhZTQ4MTk2MGNiMTY5MzhlYzQ2MWFlZmQ1MjA5OWJkNmUzMSYxMj1Nb3ppbGxhJTJGNS4wKyUyOE1hY2ludG9zaCUzQitJbnRlbCtNYWMrT1MrWCsxMF8xNV83JTI5K0FwcGxlV2ViS2l0JTJGNTM3LjM2KyUyOEtIVE1MJTJDK2xpa2UrR2Vja28lMjkrQ2hyb21lJTJGMTA1LjAuMC4wK1NhZmFyaSUyRjUzNy4zNg==';</script>
+<script>var __ez_tkn_evnt = function() { if(typeof(_ezaq) != 'undefined'){if(typeof window.ezogtk !== "undefined" && window.ezogtk !== "") {__ez.bit.AddAndFire(_ezaq.page_view_id,[new __ezDotData("ext_user_hash",window.ezogtk)]);}}};document.addEventListener("DOMContentLoaded", __ez.queue.addFunc("__ez_tkn_evnt", "__ez_tkn_evnt", event, false, ['/detroitchicago/minneapolis.js','/detroitchicago/memphis.js'], true, true, false, true));</script>
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/augusta.js" async="" data-ezscrex="false"></script>
+<script async="" data-ezscrex="false">__ez.fads.cmd.push(function(){__ez.fads.__ez_fad_load(0,0);__ez.fads.__ez_fad_scrollmon();});</script>
+<script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/init-1632lqsy2s4fklqsvsii.js" data-cfasync="false" async=""></script><noscript><img src="https://api.fouanalytics.com/api/noscript-1632lqsy2s4fklqsvsii.gif"></noscript>
+
+		<script>setTimeout(function(){googletag.cmd.push(function(){if(ezslot_interstitial==null){return;}
+googletag.display(ezslot_interstitial);googletag.pubads().refresh([ezslot_interstitial]);});},1000);</script>
+<script type="text/javascript">
+						var rFunc = function() {
+							if (typeof googletag === 'undefined') return;
+							var runNonPersonalized = 1;
+							if (__ez.ck.get("ezCMPCookieConsent",null).indexOf("4=1") !== -1) {runNonPersonalized=0;}
+							if (runNonPersonalized === 1) {
+								if(typeof __ez == 'object' && typeof __ez.bit == 'object' && typeof window["_ezaq"] == 'object' && typeof window["_ezaq"]["page_view_id"] == 'string') {
+									__ez.bit.AddAndFire(window["_ezaq"]["page_view_id"], [(new __ezDotData('non_personalized_ads', true))]);
+								}
+							}
+							(adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=runNonPersonalized;
+							(adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=0;
+							googletag.cmd.push(function() {
+							googletag.pubads().setRequestNonPersonalizedAds(runNonPersonalized);
+							googletag.pubads().refresh();
+							});
+							};
+					if(document.body.addEventListener) {document.body.addEventListener("ezCMPComplete",rFunc,false);}else{document.body.attachEvent("on"+ezCMPComplete,rFunc);}
+					</script>
+<script type="text/javascript" data-cfasync="false"></script>
+<script type="text/javascript" style="display:none;">var __ez_dims = (function() {
+		var setCookie = function( name, content, expiry ) {
+			return document.cookie = name+'='+content+((expiry)?';expires='+(new Date(Math.floor(new Date().getTime()+expiry*1000)).toUTCString()):'')+';path=/';
+		};
+		var ffid = 1;
+		var oh = window.screen.height;
+		var ow = window.screen.width;
+		var h = ffid === 1 ? oh : (oh > ow) ? oh : ow;
+		var w = ffid === 1 ? ow : (oh > ow) ? ow : oh;
+		var uh = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+		var uw = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+		setCookie('ezds', encodeURIComponent('ffid='+ffid+',w='+w+',h='+h), (31536e3*7));
+		setCookie('ezohw', encodeURIComponent('w='+uw+',h='+uh), (31536e3*7));
+	})();</script><script type="text/javascript" style="display:none;" async="">
+</script>
+<script type="text/javascript" async="" src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/ezcl.webp"></script><div style="position: absolute; margin: 0px; padding: 0px; border: 0px; height: 0px; width: 0px; overflow: hidden;"><span style="font: 999px &quot;Nimbus Sans&quot;, monospace;">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_~</span><div id="ad-1664869370173" class="ads ad ad-placement doubleclick-ad carbon-ad"></div><a aria-hidden="true"></a><button aria-hidden="true">x</button><input aria-hidden="true"></div><script src="./Multi groups line chart with ggplot2 – the R Graph Gallery_files/dall.js"></script></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
